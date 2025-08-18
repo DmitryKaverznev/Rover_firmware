@@ -20,65 +20,18 @@ DELAY = 100
 red_led = pyb.LED(1)
 green_led = pyb.LED(2)
 
-def send_result(data):
-    high_byte_id = (data.id >> 8) & 0xFF
-    low_byte_id = data.id & 0xFF
+class NumSendByte():
+    def __init__(self, num):
+        self.num = num
 
-    high_byte_cx = (data.cx >> 8) & 0xFF
-    low_byte_cx = data.cx & 0xFF
+    def getNum(self):
+        return self.num
 
-    high_byte_cy = (data.cy >> 8) & 0xFF
-    low_byte_cy = data.cy & 0xFF
+    def getByte(self):
+        high_byte = (self.num >> 8) & 0xFF
+        low_byte = self.num & 0xFF
+        return bytearray([high_byte, low_byte])
 
-    high_byte_w = (data.w >> 8) & 0xFF
-    low_byte_w = data.w & 0xFF
+class NumByteSender:
+    def __init__(self, array: NumSendByte):
 
-    checksum = BITE_START ^ high_byte_id ^ low_byte_id \
-                            ^ high_byte_cx ^ low_byte_cx ^ \
-                            high_byte_cy ^ low_byte_cy \
-                            ^ high_byte_w ^ low_byte_w
-
-    byte_data = bytearray([BITE_START,
-                            high_byte_id,
-                            low_byte_id,
-                            high_byte_cx,
-                            low_byte_cx,
-                            high_byte_cy,
-                            low_byte_cy,
-                            high_byte_w,
-                            low_byte_w,
-                            checksum])
-    uart.write(byte_data)
-
-def get_tags(sensor: sensor.Sensor):
-    img = sensor.snapshot()
-    tags = img.find_apriltags()
-
-    if tags:
-        for tag in tags:
-            img.draw_rectangle(tag.rect, color=(255, 0, 0))
-            img.draw_cross(tag.cx, tag.cy, color=(0, 255, 0))
-
-            print(f"ID: {tag.id}, W: {int(tag.w)}, CX: {tag.cx}, CY: {tag.cy}")
-
-    return tags
-
-while True:
-    clock.tick()
-
-    markers = get_tags(sensor)
-
-    if markers:
-        send_result(markers[0])
-
-        if int(markers[0].id) == 2:
-            green_led.on()
-        else:
-            red_led.on()
-
-
-
-    pyb.delay(DELAY)
-
-    red_led.off()
-    green_led.off()

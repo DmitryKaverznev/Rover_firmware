@@ -1,8 +1,0 @@
-import pyb
-
-uart = pyb.UART(3, 115200)
-uart.init(115200, bits=8)
-
-while True:
-    uart.write(bytearray([0xAB, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xAB]))
-    pyb.delay(100)

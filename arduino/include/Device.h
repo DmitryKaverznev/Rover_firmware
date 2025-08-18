@@ -18,8 +18,10 @@ namespace dev {
 
     extern Camera camera;
 
-    extern Sonar sonar1;
-    extern Sonar sonar2;
+    extern Sonar sonarForward1;
+    extern Sonar sonarForward2;
+    extern Sonar sonarBack;
+
 
     extern Servo servoCap;
     extern Motor motor;
@@ -40,8 +42,8 @@ namespace dev {
     bool getButton();
     void waitButton();
 
-    uint getSonar();
-    void waitSonar();
+    uint getSonarForward();
+    void waitSonar(Sonar& sonar);
 
     void openCap();
     void closeCap();
@@ -53,8 +55,8 @@ namespace dev {
     void motorCalibration();
 
 
-    bool goToHouse();   
-    void goMeters(uint8_t meters);
+    bool goToHouse();
+    void goMeters(float meters);
 }
 
 #endif // DEVISE_H

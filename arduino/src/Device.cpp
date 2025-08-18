@@ -8,8 +8,9 @@ HoverboardController dev::hoverDown(UART_HOVER_DOWN);
 
 Camera dev::camera(UART_CAMERA);
 
-Sonar dev::sonar1(PIN_SONAR_TRIK_1, PIN_SONAR_ECHO_1);
-Sonar dev::sonar2(PIN_SONAR_TRIK_2, PIN_SONAR_ECHO_2);
+Sonar dev::sonarForward1(PIN_SONAR_TRIK_F1, PIN_SONAR_ECHO_F1);
+Sonar dev::sonarForward2(PIN_SONAR_TRIK_F2, PIN_SONAR_ECHO_F2);
+Sonar dev::sonarBack(PIN_SONAR_TRIK_BACK, PIN_SONAR_ECHO_BACK);
 
 Motor dev::motor(PIN_MOTOR_PWM,
                  PIN_MOTOR_DIR_1,
@@ -37,8 +38,8 @@ void dev::hoverBoardSet(int16_t steer, int16_t speed) {
 }
 
 void dev::hoverBoardSetSoft(int16_t steer, int16_t time, int16_t speedEnd) {
-    dev::hoverUp.setSoft(steer, time, speedEnd);
-    dev::hoverDown.setSoft(steer, time, speedEnd);
+    dev::hoverUp.setSoft(time, steer, speedEnd);
+    dev::hoverDown.setSoft(time, steer, speedEnd);
 }
 
 void dev::hoverBoardInit() {
@@ -72,8 +73,9 @@ void dev::timersInit() {
 
 void dev::sonarInit()
 {
-    sonar1.begin();
-    sonar2.begin();
+    sonarForward1.begin();
+    sonarForward2.begin();
+    sonarBack.begin();
 }
 
 void dev::buttonInit() {
@@ -89,9 +91,9 @@ void dev::waitButton() {
     while (getButton());
 }
 
-uint dev::getSonar() {/*
-    uint dist1 = dev::sonar1.readAverage();
-    uint dist2 = dev::sonar2.readAverage();
+uint dev::getSonarForward() {
+    uint dist1 = dev::sonarForward1.readAverage();
+    uint dist2 = dev::sonarForward2.readAverage();
 
     if ((dist1 == 0 && dist2 != 0) || (dist1 != 0 && dist2 == 0)) {
         return max(dist1, dist2);
@@ -100,20 +102,18 @@ uint dev::getSonar() {/*
     }
     
     
-    return (dist1 + dist2) / 2;*/
-
-    return sonar1.readAverage();
+    return (dist1 + dist2) / 2;
 }
 
-void dev::waitSonar()
+void dev::waitSonar(Sonar& sonar)
 {
-    uint dist = getSonar();
+    uint dist = sonar.readAverage();
     while (dist == 0 || dist > 50);
 }
 
 void dev::openCap()
 {
-    for (int i = servoCap.read(); i < SERVOCAP_OPEN; i++)
+    for (int i = SERVOCAP_CLOSE; i < SERVOCAP_OPEN; i++)
     {
         servoCap.write(i);
         delay(33);
@@ -122,7 +122,11 @@ void dev::openCap()
 
 void dev::closeCap()
 {
-    servoCap.write(SERVOCAP_CLOSE);
+    for (int i = SERVOCAP_OPEN; i >= SERVOCAP_CLOSE; i--)
+    {
+        servoCap.write(i);
+        delay(33);
+    }
 }
 
 void dev::upMotor()
@@ -147,7 +151,7 @@ void dev::motorCalibration()
 {
     motor.encReset();
     motor.set(SPEED_MOTOR_CALIB);
-    delay(500);
+    delay(1000);
     motor.set(-SPEED_MOTOR_CALIB);
     delay(250);
     waitMotorMaxCurr(MOTOR_MAX_CURR);

@@ -6,21 +6,18 @@ bool dev::goToHouse() {
 
     while (true) {  
         ReciveData data = camera.getRecive();
-        uint dist1 = sonar1.readAverage();
-        uint dist2 = sonar2.readAverage();
+        uint dist1 = sonarForward1.readAverage();
+        uint dist2 = sonarForward2.readAverage();
 
         bool sonar = (dist1 != 0 && dist1 < SONAR_DIST) || (dist2 != 0 && dist2 < SONAR_DIST);
         bool camera = data.id == CAMERA_CODE && data.w < CAMERA_DIST;
         
 
-        if (camera) { 
-            return true; 
-        } else if (sonar) {
-            return false;
+        if(camera || sonar) {
+            hoverBoardSet(0, 0);
+            
+            return 0;
         }
-        
-
-        hoverBoardSet(0, HOVERBOART_SPEED);
     }
 }
 
@@ -30,7 +27,7 @@ int sign(int x) {
     return 0;
 }
 
-void dev::goMeters(uint8_t meters) {
+void dev::goMeters(float meters) {
     uint time = abs(meters * HOVERBOART_TIME_METER);
 
     hoverBoardSetSoft(0, time / 4, HOVERBOART_SPEED * sign(meters));

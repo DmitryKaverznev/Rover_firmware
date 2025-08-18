@@ -1,11 +1,9 @@
 #include <Arduino.h>
 #include "Device.h"
+#include "Demo.h"
 
 
-
-void setup() {
-    Serial.begin(115200);
- 
+void setup() { 
 
     dev::hoverBoardInit();
 
@@ -14,38 +12,50 @@ void setup() {
 
     dev::cameraInit();
     dev::sonarInit();
-    dev::motorInit();
-    dev::motorCalibration();
-    dev::servoInit();
-    dev::closeCap();
+    //dev::motorInit();
+    //dev::motorCalibration();
     dev::timersInit();
+    dev::servoCap.write(0);
+    delay(2000);
+    
+    dev::hoverBoardSet(0, 30);
+/*
 
+    
 
-    uint dist = dev::sonar1.readAverage();
-    while (dist == 0 || dist > 50) {
-        dist = dev::sonar1.readAverage();
+    for (int i = 0; i < 14; i++)
+    {
+        uint dist = dev::sonarBack.readAverage();
+        while (dist == 0 || dist > 30) {
+            dist = dev::sonarBack.readAverage();
+        }
+        delay(500);
     }
-    delay(500);
     
+
     dev::goToHouse();
-    dev::hoverBoardSet(0, 0);
-    
-    delay(500);
+    dev::hoverBoardSet(0, 0); 
+
+    delay(3000);
+
     dev::hoverBoardSet(0, -50);
-    delay(750);
+    delay(1500);
     dev::hoverBoardSet(0, 0);
     delay(500);
     dev::hoverBoardRotate180();
     dev::hoverBoardSet(0, 0);
-    dev::goMeters(2);
+    dev::goMeters(0.5);
 
     delay(2000);
+    dev::servoInit();
     dev::openCap();
-    dev::upMotor();
+    dev::upMotor();*/
+
+
+
 }
 
 
 
-void loop() {
-    Serial.println(dev::getSonar());
-}
+void loop() { 
+}   

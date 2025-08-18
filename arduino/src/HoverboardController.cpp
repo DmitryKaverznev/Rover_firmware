@@ -17,7 +17,7 @@ void HoverboardController::set(int16_t steer, int16_t speed) {
     _command.speed = speed;
 }
 
-void HoverboardController::setSoft(int16_t steer, int16_t time, int16_t speedEnd) {
+void HoverboardController::setSoft(int16_t time, int16_t steer, int16_t speedEnd) {
     softMove.speedStart = _command.speed;
     softMove.speedEnd = speedEnd;
     softMove.timeStart = millis();
