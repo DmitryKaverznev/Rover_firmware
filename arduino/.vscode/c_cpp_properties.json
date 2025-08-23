@@ -8,11 +8,11 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/include",
-                "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/src",
-                "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/AceSorting/src",
-                "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/DueTimer",
-                "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/Servo/src",
+                "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/include",
+                "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/src",
+                "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/AceSorting/src",
+                "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/DueTimer",
+                "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/Servo/src",
                 "/home/dima/.platformio/packages/framework-arduino-sam/cores/arduino",
                 "/home/dima/.platformio/packages/framework-arduino-sam/system/libsam",
                 "/home/dima/.platformio/packages/framework-arduino-sam/system/CMSIS/CMSIS/Include",
@@ -26,11 +26,11 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/include",
-                    "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/src",
-                    "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/AceSorting/src",
-                    "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/DueTimer",
-                    "/home/dima/Projects/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/Servo/src",
+                    "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/include",
+                    "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/src",
+                    "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/AceSorting/src",
+                    "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/DueTimer",
+                    "/home/dima/Документы/OnStage/Rover/Rover_firmware/arduino/.pio/libdeps/due/Servo/src",
                     "/home/dima/.platformio/packages/framework-arduino-sam/cores/arduino",
                     "/home/dima/.platformio/packages/framework-arduino-sam/system/libsam",
                     "/home/dima/.platformio/packages/framework-arduino-sam/system/CMSIS/CMSIS/Include",

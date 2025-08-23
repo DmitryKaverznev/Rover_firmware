@@ -3,10 +3,10 @@
 #include "Demo.h"
 
 
-void setup() { 
+__attribute__((unused)) void setup() {
 
     dev::hoverBoardInit();
-
+    
     dev::hoverBoardSet(0, 0);
     delay(1000);
 
@@ -17,11 +17,14 @@ void setup() {
     dev::timersInit();
     dev::servoCap.write(0);
     delay(2000);
-    
-    dev::hoverBoardSet(0, 30);
-/*
 
-    
+
+
+
+    dev::hoverBoardSet(0, 30);
+
+
+/*
 
     for (int i = 0; i < 14; i++)
     {
@@ -56,6 +59,5 @@ void setup() {
 }
 
 
-
-void loop() { 
+__attribute__((unused)) void loop() {
 }   
