@@ -1,23 +1,23 @@
 #include "Device.h"
 
 #include <Arduino.h>
-#include <DueTimer.h>
+#include <TimerOne.h>
 
-HoverboardController dev::hoverUp(UART_HOVER_UP);
-HoverboardController dev::hoverDown(UART_HOVER_DOWN);
+HoverboardController dev::hoverUp(pins::uart::hoverUp);
+HoverboardController dev::hoverDown(pins::uart::hoverDown);
 
-Camera dev::camera(UART_CAMERA);
+Camera dev::camera(pins::uart::camera);
 
-Sonar dev::sonarForward1(PIN_SONAR_TRIK_F1, PIN_SONAR_ECHO_F1);
-Sonar dev::sonarForward2(PIN_SONAR_TRIK_F2, PIN_SONAR_ECHO_F2);
-Sonar dev::sonarBack(PIN_SONAR_TRIK_BACK, PIN_SONAR_ECHO_BACK);
+Sonar dev::sonarForward1(pins::sonar::trigF1, pins::sonar::echoF1);
+Sonar dev::sonarForward2(pins::sonar::trigF2, pins::sonar::echoF2);
+Sonar dev::sonarBack(pins::sonar::trigBack, pins::sonar::echoBack);
 
-Motor dev::motor(PIN_MOTOR_PWM,
-                 PIN_MOTOR_DIR_1,
-                 PIN_MOTOR_DIR_2,
-                 PIN_MOTOR_ENC_DIR,
-                 PIN_MOTOR_ENC_INT,
-                 PIN_MOTOR_CURR);
+Motor dev::motor(pins::motor::pwm,
+                 pins::motor::dir1,
+                 pins::motor::dir2,
+                 pins::motor::encDir,
+                 pins::motor::encEnc,
+                 pins::motor::curr);
 
 Servo dev::servoCap;
 
@@ -33,13 +33,15 @@ void encoderInterrupt() {
 }
 
 void dev::hoverBoardSet(int16_t steer, int16_t speed) {
+    //Serial.println("Set: " +  String(speed));
+
     dev::hoverUp.set(steer, speed);
     dev::hoverDown.set(steer, speed);
 }
 
 void dev::hoverBoardSetSoft(int16_t steer, int16_t time, int16_t speedEnd) {
-    dev::hoverUp.setSoft(time, steer, speedEnd);
-    dev::hoverDown.setSoft(time, steer, speedEnd);
+    dev::hoverUp.setSoft(steer, time, speedEnd);
+    dev::hoverDown.setSoft(steer, time, speedEnd);
 }
 
 void dev::hoverBoardInit() {
@@ -56,19 +58,20 @@ void dev::cameraInit() {
 
 void dev::servoInit()
 {
-    servoCap.attach(PIN_SERVOCAP);
+    servoCap.attach(pins::servoCap);
 }
 
 void dev::motorInit()
 {
     motor.init();
     
-    attachInterrupt(digitalPinToInterrupt(PIN_MOTOR_ENC_INT), encoderInterrupt, RISING);
+    attachInterrupt(digitalPinToInterrupt(pins::motor::encEnc), encoderInterrupt, RISING);
 }
 
 void dev::timersInit() {
     Timer1.attachInterrupt(timerInterrupt);
-    Timer1.start(TIME_SEND);
+    Timer1.setPeriod(settings::hoverboard::timeSendPeriod);
+    Timer1.start();
 }
 
 void dev::sonarInit()
@@ -91,13 +94,13 @@ void dev::waitButton() {
     while (getButton());
 }
 
-uint dev::getSonarForward() {
-    uint dist1 = dev::sonarForward1.readAverage();
-    uint dist2 = dev::sonarForward2.readAverage();
+int dev::getSonarForward() {
+    int dist1 = dev::sonarForward1.readAverage();
+    int dist2 = dev::sonarForward2.readAverage();
 
     if ((dist1 == 0 && dist2 != 0) || (dist1 != 0 && dist2 == 0)) {
         return max(dist1, dist2);
-    } else if (dist1 == 0 || dist2 == 0) {
+    } else if (dist1 == 0) {
         return 0;
     }
     
@@ -107,22 +110,22 @@ uint dev::getSonarForward() {
 
 void dev::waitSonar(Sonar& sonar)
 {
-    uint dist = sonar.readAverage();
+    int dist = sonar.readAverage();
     while (dist == 0 || dist > 50);
 }
 
-void dev::openCap()
+void dev::openCap() // TODO: переписать
 {
-    for (int i = SERVOCAP_CLOSE; i < SERVOCAP_OPEN; i++)
+    for (int i = settings::servoCap::close; i < settings::servoCap::open; i++)
     {
         servoCap.write(i);
         delay(33);
     }
 }
 
-void dev::closeCap()
+void dev::closeCap() // TODO: переписать
 {
-    for (int i = SERVOCAP_OPEN; i >= SERVOCAP_CLOSE; i--)
+    for (int i = settings::servoCap::open; i >= settings::servoCap::close; i--)
     {
         servoCap.write(i);
         delay(33);
@@ -131,11 +134,11 @@ void dev::closeCap()
 
 void dev::upMotor()
 {
-    motorRun(SPEED_MOTOR_OPEN, TIME_MOTOR_OPEN);
+    motorRun(settings::motor::speedOpen, settings::motor::timeOpen);
     motor.set(0);
 }
 
-void dev::waitMotorMaxCurr(uint max)
+void dev::waitMotorMaxCurr(int max)
 {
     while (dev::motor.getCurr() < max);
 }
@@ -150,18 +153,18 @@ void dev::motorRun(int16_t speed, int16_t time)
 void dev::motorCalibration()
 {
     motor.encReset();
-    motor.set(SPEED_MOTOR_CALIB);
+    motor.set(settings::motor::speedMotorCalib);
     delay(1000);
-    motor.set(-SPEED_MOTOR_CALIB);
+    motor.set(-settings::motor::speedMotorCalib);
     delay(250);
-    waitMotorMaxCurr(MOTOR_MAX_CURR);
+    waitMotorMaxCurr(settings::motor::motorMaxCurr);
     motor.set(0);
     motor.encReset();
 }
 
 void dev::hoverBoardRotate180() {
-    hoverBoardSet(HOVERBOARD_ROTATE_180_SPEED, 0);
-    delay(HOVERBOARD_ROTATE_180_TIME);
+    hoverBoardSet(settings::hoverboard::rotate180Speed, 0);
+    delay(settings::hoverboard::rotate180Time);
     hoverBoardSet(0, 0);
 }
 
@@ -176,4 +179,5 @@ void dev::hoverBoardRotate180() {
 //     delay(time);
 
 //     return average;
+// }
 // }

@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 #define SPEED_MAX 255
-#define SPEED_MIN -255
+#define SPEED_MIN (-255)
 
 
 class Motor {

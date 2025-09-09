@@ -1,9 +1,11 @@
 #include <Arduino.h>
 
+#define PIN_ 3
+
 void setup() {
-  Serial.begin(115200);
+    pinMode)_
 }
 
 void loop() {
-  Serial.println("test1");
+
 }

@@ -42,7 +42,7 @@ namespace dev {
     bool getButton();
     void waitButton();
 
-    uint getSonarForward();
+    int getSonarForward();
     void waitSonar(Sonar& sonar);
 
     void openCap();
@@ -50,13 +50,13 @@ namespace dev {
 
     void upMotor();
 
-    void waitMotorMaxCurr(uint max);
+    void waitMotorMaxCurr(int max);
     void motorRun(int16_t speed, int16_t time);\
     void motorCalibration();
 
 
     bool goToHouse();
-    void goMeters(float meters);
+    void goMeters(int meters);
 }
 
 #endif // DEVISE_H

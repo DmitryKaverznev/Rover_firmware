@@ -18,8 +18,133 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea94aa18-f057-4bf1-a810-35d050bf2f08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Inc/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platformio.ini" beforeDir="false" afterPath="$PROJECT_DIR$/platformio.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../arduino/test/mpu/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/AceSorting.h.B2593CCBA280CD47.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Camera.cpp.EC6937BF42DBA5F6.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Camera.h.2FA89820112D5A94.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Config.h.486D5FD3E004DA82.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Demo.cpp.680EF2A4FBCE8D6F.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Demo.h.291D8EFFBDA3ACF0.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Device.cpp.E425F4A9C878BC8F.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Device.h.D3BD4E632515EDF9.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/DueTimer.cpp.9858C25440DECE96.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/DueTimer.h.32306440C3E0C9CF.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/HoverboardController.cpp.B6909B51239D4FB8.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/HoverboardController.h.03CA137838C7D460.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Motor.cpp.E8EBBA2A768BD25E.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Motor.h.CB2B239D3DA85AEA.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Robot.cpp.9C4F4AEB5B350AF2.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.0418F85158BC8CBB.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.4B604148EE1C3BE5.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.8FDAF3A8D93525CF.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.910827437DC569A3.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.91B708CA634DD716.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.CA380889AE6EE8A2.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.E1C9735DDB5CD3F0.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.EE4CDC952F3C4A9C.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.cpp.FEEFAC643142C6ED.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Servo.h.C0830B0F1DEFE8A2.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/ServoTimers.h.B3FBC77E444101CE.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Sonar.cpp.268243862AC8FDC9.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/Sonar.h.63B951406BDBB646.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/bubbleSort.h.159A5278FD95A01C.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/combSort.h.9B7163FC4E2DD969.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/insertionSort.h.9E2211071CC821CC.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/main.cpp.F50918F883D94CA6.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/quickSort.h.1CFD5D2DAEE762C0.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/selectionSort.h.60501FE010421F7A.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/shellSort.h.B0FEFF9A562BCC30.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.cache/clangd/index/swap.h.E18AC1C5769F5642.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.vscode/c_cpp_properties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/compile_commands.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/include/Motor.h" beforeDir="false" afterPath="$PROJECT_DIR$/../arduino/include/Motor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/platformio.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../arduino/platformio.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../arduino/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/test/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/test/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/test/platformio.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/test/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../arduino/test/src/main.cpp2" beforeDir="false" afterPath="$PROJECT_DIR$/../arduino/test/levelConverter/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/.sconsign312.dblite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkCMSISDevice/system_stm32f1xx.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkCMSISDevice/system_stm32f1xx.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_adc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_adc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_adc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_adc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_can.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_can.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_cec.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_cec.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_cortex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_cortex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_crc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_crc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dac.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dac.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dac_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dac_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dma.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_dma.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_eth.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_eth.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_exti.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_exti.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_flash.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_flash.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_flash_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_flash_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_gpio.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_gpio.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_gpio_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_gpio_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_hcd.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_hcd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_i2c.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_i2c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_i2s.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_i2s.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_irda.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_irda.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_iwdg.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_iwdg.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_mmc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_mmc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_nand.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_nand.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_nor.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_nor.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pccard.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pccard.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pcd.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pcd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pcd_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pcd_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pwr.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_pwr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rcc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rcc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rcc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rcc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rtc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rtc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rtc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_rtc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_sd.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_sd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_smartcard.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_smartcard.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_spi.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_spi.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_sram.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_sram.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_tim.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_tim.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_tim_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_tim_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_uart.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_uart.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_usart.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_usart.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_wwdg.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_hal_wwdg.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_adc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_adc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_crc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_crc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_dac.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_dac.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_dma.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_dma.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_exti.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_exti.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_fsmc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_fsmc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_gpio.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_gpio.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_i2c.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_i2c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_pwr.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_pwr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_rcc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_rcc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_rtc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_rtc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_sdmmc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_sdmmc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_spi.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_spi.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_tim.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_tim.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_usart.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_usart.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_usb.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_usb.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_utils.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/FrameworkHALDriver/Src/stm32f1xx_ll_utils.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/firmware.elf" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/firmware.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/idedata.json" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/idedata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/libFrameworkCMSISDevice.a" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/libFrameworkCMSISDevice.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/BLDC_controller.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/BLDC_controller.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/BLDC_controller_data.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/BLDC_controller_data.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/bldc.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/bldc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/comms.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/comms.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/control.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/control.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/eeprom.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/eeprom.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/hd44780.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/hd44780.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/pcf8574.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/pcf8574.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/setup.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/setup.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/stm32f1xx_it.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/stm32f1xx_it.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/system_stm32f1xx.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/system_stm32f1xx.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/util.o" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/VARIANT_USART/src/util.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pio/build/project.checksum" beforeDir="false" afterPath="$PROJECT_DIR$/.pio/build/project.checksum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +161,7 @@
     </projectState>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -50,33 +175,6 @@
     &quot;accountId&quot;: &quot;1309ed8d-8dbf-4d95-8ad4-5e9292b24db8&quot;
   }
 }</component>
-  <component name="PlatformioLocalSettings">
-    <option name="availableProjects">
-      <map>
-        <entry>
-          <key>
-            <ExternalProjectPojo>
-              <option name="name" value="hoverboard-firmware-hack-FOC" />
-              <option name="path" value="$PROJECT_DIR$" />
-            </ExternalProjectPojo>
-          </key>
-          <value>
-            <list>
-              <ExternalProjectPojo>
-                <option name="name" value="hoverboard-firmware-hack-FOC" />
-                <option name="path" value="$PROJECT_DIR$" />
-              </ExternalProjectPojo>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="projectSyncType">
-      <map>
-        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
-      </map>
-    </option>
-  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2024" />
@@ -93,6 +191,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;PlatformIO.PlatformIO.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
@@ -101,23 +200,18 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Documents/OnStage/HoverboardFirmaware/hoverboard-firmware-hack-FOC&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dima/Документы/Rover_firmware/hoverboard&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs.protractor.protractor_package&quot;: &quot;&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;clion.platformio.config&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PlatformIO" type="platformio" factoryName="PlatformIO Debug" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="hoverboard-firmware-hack-FOC" TARGET_NAME="PlatformIO" CONFIG_NAME="PlatformIO">
       <method v="2" />
     </configuration>
@@ -168,10 +262,21 @@
       <workItem from="1743853858692" duration="1409000" />
       <workItem from="1744134839983" duration="11000" />
       <workItem from="1744383230645" duration="17000" />
+      <workItem from="1757148968645" duration="27000" />
+      <workItem from="1757149007864" duration="25000" />
+      <workItem from="1757149049836" duration="44000" />
+      <workItem from="1757149110339" duration="5000" />
+      <workItem from="1757149121178" duration="201000" />
+      <workItem from="1757160698100" duration="30000" />
+      <workItem from="1757164787704" duration="42000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

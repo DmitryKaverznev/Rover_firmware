@@ -1,34 +1,25 @@
 #include <Arduino.h>
 #include "Device.h"
-#include "Demo.h"
 
 
 __attribute__((unused)) void setup() {
-
+    Serial.begin(115200);
     dev::hoverBoardInit();
-    
-    dev::hoverBoardSet(0, 0);
-    delay(1000);
+    dev::timersInit();  // Сначала запускаем таймеры
+    dev::hoverBoardSet(0, 50);  // Потом устанавливаем значения
 
+/*
     dev::cameraInit();
     dev::sonarInit();
-    //dev::motorInit();
-    //dev::motorCalibration();
+    dev::motorInit();
+    dev::motorCalibration();
     dev::timersInit();
     dev::servoCap.write(0);
     delay(2000);
 
-
-
-
-    dev::hoverBoardSet(0, 30);
-
-
-/*
-
     for (int i = 0; i < 14; i++)
     {
-        uint dist = dev::sonarBack.readAverage();
+        int dist = dev::sonarBack.readAverage();
         while (dist == 0 || dist > 30) {
             dist = dev::sonarBack.readAverage();
         }
@@ -53,9 +44,6 @@ __attribute__((unused)) void setup() {
     dev::servoInit();
     dev::openCap();
     dev::upMotor();*/
-
-
-
 }
 
 

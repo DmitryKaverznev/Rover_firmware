@@ -16,8 +16,8 @@ class Sonar {
 public:
     Sonar(uint8_t pinTrig, uint8_t pinEcho);
     void begin();
-    uint read();
-    uint readAverage();
+    int16_t read();
+    int16_t readAverage();
 
     
 private:
@@ -25,7 +25,7 @@ private:
     uint8_t _pinEcho;
 
     uint8_t _timer;
-    uint _dists[SIZE_AVERAGE];
+    uint8_t _dists[SIZE_AVERAGE];
 
 };
 

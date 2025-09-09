@@ -1,22 +1,22 @@
 #include "Device.h"
 
 bool dev::goToHouse() {
-    hoverBoardSetSoft(0, 1000, HOVERBOART_SPEED);
+    hoverBoardSetSoft(0, 1000, settings::hoverboard::speed);
     delay(1000);
 
     while (true) {  
         ReciveData data = camera.getRecive();
-        uint dist1 = sonarForward1.readAverage();
-        uint dist2 = sonarForward2.readAverage();
+        uint16_t dist1 = sonarForward1.readAverage();
+        uint16_t dist2 = sonarForward2.readAverage();
 
-        bool sonar = (dist1 != 0 && dist1 < SONAR_DIST) || (dist2 != 0 && dist2 < SONAR_DIST);
-        bool camera = data.id == CAMERA_CODE && data.w < CAMERA_DIST;
-        
+        bool sonar = (dist1 != 0 && dist1 < settings::sonarDist) || (dist2 != 0 && dist2 < settings::sonarDist);
+        bool cameraOk = data.id == settings::camera::code && data.w < settings::camera::dist;
 
-        if(camera || sonar) {
+
+        if(cameraOk || sonar) {
             hoverBoardSet(0, 0);
             
-            return 0;
+            return false;
         }
     }
 }
@@ -27,12 +27,12 @@ int sign(int x) {
     return 0;
 }
 
-void dev::goMeters(float meters) {
-    uint time = abs(meters * HOVERBOART_TIME_METER);
+void dev::goMeters(int meters) {
+    int16_t time = abs(meters * settings::hoverboard::timeMeter);
 
-    hoverBoardSetSoft(0, time / 4, HOVERBOART_SPEED * sign(meters));
+    hoverBoardSetSoft(0, time / 4, settings::hoverboard::speed * sign(meters));
     delay(time / 4);
-    hoverBoardSet(0, HOVERBOART_SPEED * sign(meters));
+    hoverBoardSet(0, settings::hoverboard::speed * sign(meters));
     delay(time / 2);
     hoverBoardSetSoft(0, time / 4, 0);
     delay(time / 4);

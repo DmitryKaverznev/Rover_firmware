@@ -39,15 +39,16 @@ enum class DebugMode {
 
 class HoverboardController {
 public:
-    HoverboardController(HardwareSerial& hoverSerial);
+    HoverboardController(USARTClass& hoverSerial);
     void begin();
     void set(int16_t steer, int16_t speed);
     void setSoft(int16_t steer, int16_t time, int16_t speedEnd);
     void timerInterrupt();
+    void updateReceive();
     void setDebug(DebugMode debugMode);
 
 private:
-    HardwareSerial& _hoverSerial;
+    USARTClass& _hoverSerial;
     SerialCommand _command;
     SoftMove softMove;
     DebugMode _debugMode;

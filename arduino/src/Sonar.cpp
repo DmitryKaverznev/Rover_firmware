@@ -5,19 +5,19 @@ Sonar::Sonar(uint8_t pinTrig, uint8_t pinEcho) {
     _pinEcho = pinEcho;
 }
 
-uint Sonar::read() {
+int16_t Sonar::read() {
     while(millis() - _timer < DELAY_BETWEEN);
     
     digitalWrite(_pinTrig, HIGH);
     delayMicroseconds(DELAY_TRIG);
     digitalWrite(_pinTrig, LOW);
 
-    uint16_t duration = pulseIn(_pinEcho, HIGH, MAX_DIST);
+    int16_t duration = pulseIn(_pinEcho, HIGH, MAX_DIST);
     _timer = millis();
     return duration / DIST_SOUND; 
 }
 
-uint Sonar::readAverage()
+int16_t Sonar::readAverage()
 {
     for (int i = 0; i < SIZE_AVERAGE; i++)
     {

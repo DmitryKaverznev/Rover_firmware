@@ -1,6 +1,6 @@
 #include "HoverboardController.h"
 
-HoverboardController::HoverboardController(USARTClass& hoverSerial) : _hoverSerial(hoverSerial) {
+HoverboardController::HoverboardController(HardwareSerial& hoverSerial) : _hoverSerial(hoverSerial) {
     _command.start = 0;
     _command.steer = 0;
     _command.speed = 0;
@@ -17,7 +17,7 @@ void HoverboardController::set(int16_t steer, int16_t speed) {
     _command.speed = speed;
 }
 
-void HoverboardController::setSoft(int16_t time, int16_t steer, int16_t speedEnd) {
+void HoverboardController::setSoft(int16_t steer, int16_t time, int16_t speedEnd) {
     softMove.speedStart = _command.speed;
     softMove.speedEnd = speedEnd;
     softMove.timeStart = millis();

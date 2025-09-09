@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 
-Camera::Camera(USARTClass& cameraSerial) : _cameraSerial(cameraSerial) {}
+Camera::Camera(HardwareSerial& cameraSerial) : _cameraSerial(cameraSerial) {}
 
 void Camera::begin() {
   _cameraSerial.begin(115200);
@@ -12,7 +12,7 @@ void Camera::timerInterrupt() {
 }
 
 void Camera::_receive() {
-    const uint8_t packetSize = sizeof(ReciveData) + sizeof(uint8_t) * 2;
+        const uint8_t packetSize = sizeof(ReciveData) + sizeof(uint8_t) * 2;
     
     if (_cameraSerial.available() >= packetSize) {
 

@@ -14,12 +14,12 @@ typedef struct {
 
 class Camera {
 public:
-    Camera(USARTClass& cameraSerial);
+    Camera(HardwareSerial& cameraSerial);
     void timerInterrupt();
     void begin();
     ReciveData getRecive();
 private:
-    USARTClass& _cameraSerial;
+    HardwareSerial& _cameraSerial;
     ReciveData _reciveData;
     
     void _receive();

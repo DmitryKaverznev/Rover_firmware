@@ -1,39 +1,60 @@
-#define CAMERA_CODE 2
+#pragma once
+#include <Arduino.h>
 
-#define CAMERA_DIST 100
-#define SONAR_DIST   30
+namespace settings {
+    namespace camera {
+        constexpr uint8_t code = 2;
+        constexpr uint16_t dist = 100;
+    }
 
-#define TIME_SEND        100000
-#define TIME_MOTOR_OPEN    5300
-#define SPEED_MOTOR_OPEN    250
-#define SPEED_MOTOR_CALIB   250
+    constexpr uint16_t sonarDist = 30;
 
-#define SERVOCAP_OPEN 90
-#define SERVOCAP_CLOSE 0
+    namespace motor {
+        constexpr uint16_t timeOpen = 5300;
+        constexpr uint16_t speedOpen = 250;
+        constexpr int16_t speedMotorCalib = 250;
+        constexpr int8_t motorMaxCurr = 25;
+    }
 
-#define UART_HOVER_UP   Serial2
-#define UART_HOVER_DOWN Serial1
-#define UART_CAMERA     Serial3
+    namespace servoCap {
+        constexpr uint8_t open = 90;
+        constexpr uint8_t close = 0;
+    }
 
-#define PIN_SONAR_TRIK_F1    9
-#define PIN_SONAR_ECHO_F1    8
-#define PIN_SONAR_TRIK_F2    6
-#define PIN_SONAR_ECHO_F2    5
-#define PIN_SONAR_TRIK_BACK  47
-#define PIN_SONAR_ECHO_BACK  46
-#define PIN_SERVOCAP         17
+    namespace hoverboard {
+        constexpr uint32_t timeSendPeriod = 100000;
+        constexpr uint8_t speed = 50;
+        constexpr uint8_t rotate180Speed = 100;
+        constexpr uint16_t rotate180Time = 2150;
+        constexpr uint16_t timeMeter = 1500;
+    }
+}
 
-#define PIN_MOTOR_DIR_1     2
-#define PIN_MOTOR_DIR_2     3
-#define PIN_MOTOR_PWM       4
-#define PIN_MOTOR_CURR    A11
-#define PIN_MOTOR_ENC_DIR  15
-#define PIN_MOTOR_ENC_INT  14
-#define MOTOR_MAX_CURR     25
+namespace pins {
+    namespace motor {
+        constexpr uint8_t dir1 = 2;
+        constexpr uint8_t dir2 = 3;
+        constexpr uint8_t pwm = 4;
+        constexpr uint8_t curr = A11;
+        constexpr uint8_t encDir = 15;
+        constexpr uint8_t encEnc = 14;
+    }
 
-#define HOVERBOART_SPEED              50
-#define HOVERBOARD_ROTATE_180_SPEED  100
-#define HOVERBOARD_ROTATE_180_TIME  2150
-#define HOVERBOART_TIME_METER       1500
+    namespace sonar {
+        constexpr uint8_t trigF1 = 9;
+        constexpr uint8_t echoF1 = 8;
+        constexpr uint8_t trigF2 = 6;
+        constexpr uint8_t echoF2 = 5;
+        constexpr uint8_t trigBack = 47;
+        constexpr uint8_t echoBack = 46;
+    }
 
-#define SIZE_AVERAGE 5
+    constexpr uint8_t servoCap = 17;
+
+
+    namespace uart {
+        extern HardwareSerial& hoverUp;
+        extern HardwareSerial& hoverDown;
+        extern HardwareSerial& camera;
+    }
+}
