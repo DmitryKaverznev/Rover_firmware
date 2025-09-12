@@ -31,8 +31,6 @@
 #define SERIAL_BAUD         115200      // [-] Baud rate for built-in Serial (used for the Serial Monitor)
 #define START_FRAME         0xABCD     	// [-] Start frme definition for reliable serial communication
 #define TIME_SEND           100         // [ms] Sending time interval
-#define SPEED_MAX_TEST      50         // [-] Maximum speed for testing
-#define SPEED_STEP          10          // [-] Speed step
 // #define DEBUG_RX                        // [-] Debug received data. Prints all bytes to serial (comment-out to disable)
 
 
@@ -149,8 +147,7 @@ void Receive()
 // ########################## LOOP ##########################
 
 unsigned long iTimeSend = 0;
-int iTest = 0;
-int iStep = SPEED_STEP;
+bool firstRun = true;
 
 void loop(void)
 {
@@ -162,14 +159,17 @@ void loop(void)
     // Send commands
     if (iTimeSend > timeNow) return;
     iTimeSend = timeNow + TIME_SEND;
-    Send(0, -iTest);
 
-    // Calculate test command signal
-    iTest += iStep;
 
-    // invert step if reaching limit
-    if (iTest >= SPEED_MAX_TEST || iTest <= -SPEED_MAX_TEST)
-        iStep = -iStep;
+    if (firstRun) {
+        Send(0, 0);
+        delay(2000);
+        Send(0, 50);
+        firstRun = false;
+    } else {
+        Send(0, 50);
+    }
+
 
     // Blink the LED
     digitalWrite(LED_BUILTIN, (timeNow%2000)<1000);

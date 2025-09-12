@@ -22,7 +22,7 @@ namespace settings {
     }
 
     namespace hoverboard {
-        constexpr uint32_t timeSendPeriod = 1000000;
+        constexpr uint32_t timeSendPeriod = 100000;
         constexpr uint8_t speed = 50;
         constexpr uint8_t rotate180Speed = 100;
         constexpr uint16_t rotate180Time = 2150;
