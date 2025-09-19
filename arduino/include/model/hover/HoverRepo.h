@@ -27,7 +27,7 @@ public:
         }
     }
 
-    void set(int16_t speed, int16_t steer) {
+    void set(int16_t speed, int16_t steer = 0) {
         if (_isBegin == IsBeginEnum::INIT) {
             Log.traceln("Hover set | %d %d", speed, steer);
             hoverUp.set(-speed, steer);

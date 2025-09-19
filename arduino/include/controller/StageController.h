@@ -3,14 +3,13 @@
 #include <Arduino.h>
 #include <ArduinoLog.h>
 
-#include "usecase/HoverSpeedUseCase.h"
 
 class StageController {
 public:
-    HoverSpeedUseCase& hoverSpeedUseCase;
+    HoverRepo& hoverRepo;
 
-    explicit StageController(HoverSpeedUseCase& hoverSpeedUseCase) :
-            hoverSpeedUseCase(hoverSpeedUseCase) {
+    explicit StageController(HoverRepo& hoverRepo) :
+            hoverRepo(hoverRepo) {
     }
 
     void run() {
@@ -21,10 +20,11 @@ public:
 
         Log.infoln("Starting StageController...");
 
-        hoverSpeedUseCase.invoke(0);
+        hoverRepo.init();
+
+        hoverRepo.set(0);
         delay(2000);
-        hoverSpeedUseCase.invoke(50);
-        delay(3000);
-        hoverSpeedUseCase.invoke(0);
+
+        hoverRepo.set(0);
     }
 };
