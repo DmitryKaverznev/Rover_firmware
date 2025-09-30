@@ -11,8 +11,6 @@ public:
             _route{0, 0},
             _serial(hoverSerial) {
         _serial.begin(SERIAL_RATE);
-
-        Log.traceln("CREATE");
     }
 
     void set(int16_t speed, int16_t steer) {
@@ -24,8 +22,6 @@ public:
     }
 
     void update() {
-        // Log.traceln("Update hover");
-
         _send();
     }
 
@@ -44,13 +40,6 @@ private:
         command.steer    = (int16_t)_route.steer;
         command.speed    = (int16_t)_route.speed;
         command.checksum = (uint16_t)(command.start ^ command.steer ^ command.speed);
-
-        Log.traceln("SEND - %X %X %X %X | %d | %d", command.start,
-                                                    command.steer,
-                                                    command.speed,
-                                                    command.checksum,
-                                                    command.steer,
-                                                    command.speed);
 
         _serial.write((uint8_t *) &command, sizeof(command));
     }

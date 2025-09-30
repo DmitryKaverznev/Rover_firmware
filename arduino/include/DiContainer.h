@@ -1,42 +1,37 @@
 #pragma once
 
 #include "Config.h"
+
 #include "model/hover/HoverRepo.h"
+#include "model/MPURepo.h"
+
 #include "controller/StageController.h"
 
 class DiContainer {
 private:
-    // repo
     HoverRepo* hoverRepo;
+    MPURepo* mpuRepo;
 
-    // controller
     StageController* stageController;
 
+public:
     DiContainer() {
         hoverRepo = new HoverRepo(pins::uart::hoverUp, pins::uart::hoverDown);
-        stageController = new StageController(*hoverRepo);
-    }
-
-    ~DiContainer() {
-        delete hoverRepo;
-        delete stageController;
-    }
-
-public:
-    static DiContainer& getInstance() {
-        static DiContainer _instance; // NOLINT(*-dynamic-static-initializers)
-        return _instance;
+        mpuRepo = new MPURepo();
+        stageController = new StageController(*hoverRepo, *mpuRepo);
     }
 
     StageController* getController() {
         return stageController;
     }
 
-    HoverRepo* getHoverRepo() {
-        return hoverRepo;
+    MPURepo* getMPURepo() {
+        return mpuRepo;
     }
 
-    DiContainer(const DiContainer&) = delete;
-    DiContainer& operator=(const DiContainer&) = delete;
-
+    ~DiContainer() {
+        delete stageController;
+        delete mpuRepo;
+        delete hoverRepo;
+    }
 };
