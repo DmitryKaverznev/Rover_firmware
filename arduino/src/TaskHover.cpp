@@ -10,6 +10,6 @@
         taskENTER_CRITICAL();
         repo->update();
         taskEXIT_CRITICAL();
-        delay(50);
+        delay(100);
     }
 }

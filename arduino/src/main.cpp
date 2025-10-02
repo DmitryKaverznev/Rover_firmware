@@ -2,13 +2,13 @@
 #include <Arduino_FreeRTOS.h>
 
 #include "DiContainer.h"
-#include "Result.h"
+#include "utilis/Result.h"
 
 [[noreturn]] void vTaskMain(void *pvParameters) {
     (void) pvParameters;
 
     Serial.begin(115200);
-    Log.begin(LOG_LEVEL_INFO, &Serial, true);
+    Log.begin(LOG_LEVEL_TRACE, &Serial, true);
     Log.infoln("\n\n\n");
 
     DiContainer diContainer;

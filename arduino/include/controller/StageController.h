@@ -2,27 +2,25 @@
 
 #include <Arduino.h>
 #include <ArduinoLog.h>
-#include "Result.h"
+
+#include "utilis/Result.h"
+#include "utilis/SoftMode.h"
+#include "utilis/RepeatRun.h"
 
 class StageController {
 public:
-    explicit StageController(HoverRepo& hoverRepo, MPURepo& mpuRepo) :
+    explicit StageController(HoverRepo& hoverRepo,
+                             MPURepo& mpuRepo,
+                             RotateUseCase& rotateUseCase) :
             hoverRepo(hoverRepo),
-            mpuRepo(mpuRepo)
-            {}
+            mpuRepo(mpuRepo),
+            rotateUseCase(rotateUseCase) {
+    }
 
     void run() {
         Log.infoln(F("Starting main program..."));
 
-
-
-        while (1) {
-            float yaw = (mpuRepo.getData())[0] * 180.0f / M_PI;
-            Serial.println(yaw);
-        }
-
-        delay(10);
-
+        rotateUseCase(90, 20, 60);
     }
 
     Result init() {
@@ -32,12 +30,12 @@ public:
 
         Result allInit = Result::Ok;
 
-        allInit = resultAnd(allInit, mpuRepo.init());
+        allInit = resultAnd(allInit, repeatRun::initMPU(mpuRepo));
 
         if (allInit == Result::Error) {
-            Log.fatalln("Mail init is fatal!");
+            Log.fatalln(F("Mail init is fatal!"));
         } else {
-            Log.infoln("Main init is success");
+            Log.infoln(F("Main init is success"));
         }
 
         return allInit;
@@ -46,4 +44,6 @@ public:
 private:
     HoverRepo& hoverRepo;
     MPURepo& mpuRepo;
+
+    RotateUseCase& rotateUseCase;
 };

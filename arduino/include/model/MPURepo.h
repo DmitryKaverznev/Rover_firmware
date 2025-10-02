@@ -2,25 +2,22 @@
 
 #include <ArduinoLog.h>
 
-#include "Result.h"
+#include "utilis/Result.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 
-void DMPDataReady();
-
-extern bool DMPReady;
 class MPURepo {
 public:
 
     Result init() {
         Log.infoln(F("MPURepo -> is being initialized..."));
 
-        attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), DMPDataReady, RISING);
-        DMPReady = false;
         Result resultInit = mpuInit();
 
 
         if (resultInit == Result::Ok) {
+
+
             Log.infoln(F("MPURepo -> initialized"));
             return Result::Ok;
         } else {
@@ -30,17 +27,14 @@ public:
     }
 
     float* getData() {
-/*        while (!DMPReady) {
-            Log.infoln("%d" ,digitalRead(INTERRUPT_PIN));
-        }*/
-
         while (true) {
             if (mpu.dmpGetCurrentFIFOPacket(FIFOBuffer)) {
+                taskENTER_CRITICAL();
                 mpu.dmpGetQuaternion(&quaternion, FIFOBuffer);
                 mpu.dmpGetGravity(&gravity, &quaternion);
                 mpu.dmpGetYawPitchRoll(ypr, &quaternion, &gravity);
+                taskEXIT_CRITICAL();
 
-                DMPReady = false;
                 return ypr;
             }
         }
@@ -48,8 +42,6 @@ public:
 
 private:
     MPU6050 mpu;
-
-    const int INTERRUPT_PIN = 63;
 
     Quaternion quaternion;
     VectorFloat gravity;
@@ -72,8 +64,8 @@ private:
             return Result::Error;
         }
 
-        mpu.CalibrateAccel(6);
-        mpu.CalibrateGyro(6);
+        mpu.CalibrateAccel(50);
+        mpu.CalibrateGyro(50);
         mpu.PrintActiveOffsets();
 
         Log.infoln(F("Enabling DMP..."));

@@ -16,9 +16,6 @@ public:
     void set(int16_t speed, int16_t steer) {
         _route.speed = speed;
         _route.steer = steer;
-
-        Log.traceln("SET %d | %d - command", _route.steer, _route.speed);
-
     }
 
     void update() {

@@ -21,7 +21,7 @@ public:
         xTaskCreate(
                 vTaskHover,
                 "Hover",
-                configMINIMAL_STACK_SIZE,
+                256,
                 this,
                 1,
                 nullptr
@@ -31,9 +31,10 @@ public:
     }
 
     void set(int16_t speed, int16_t steer = 0) {
-        Log.traceln("Hover set | %d %d", speed, steer);
+        taskENTER_CRITICAL();
         hoverUp.set(-speed, steer);
         hoverDown.set(speed, steer);
+        taskEXIT_CRITICAL();
     }
 
     void update() {
