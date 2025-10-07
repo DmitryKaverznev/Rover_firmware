@@ -1,6 +1,6 @@
 #include "utilis/Result.h"
 
-Result resultAnd(Result lhs, Result rhs) {
+Result resultAnd(const Result lhs, const Result rhs) {
     if (lhs == Result::Ok && rhs == Result::Ok) {
         return Result::Ok;
     } else {

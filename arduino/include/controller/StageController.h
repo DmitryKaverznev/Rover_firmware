@@ -3,39 +3,59 @@
 #include <Arduino.h>
 #include <ArduinoLog.h>
 
+#include "model/hover/HoverRepo.h"
+#include "model/CameraRepo.h"
+#include "usecase/LineUseCase.h"
+
+#include "usecase/RotateUseCase.h"
+
 #include "utilis/Result.h"
-#include "utilis/SoftMode.h"
 #include "utilis/RepeatRun.h"
 
 class StageController {
 public:
-    explicit StageController(HoverRepo& hoverRepo,
-                             MPURepo& mpuRepo,
-                             RotateUseCase& rotateUseCase) :
-            hoverRepo(hoverRepo),
-            mpuRepo(mpuRepo),
-            rotateUseCase(rotateUseCase) {
+  
+  StageController(HoverRepo& hoverRepo,
+                                   MPURepo& mpuRepo,
+                                   CameraRepo& cameraRepo,
+                                   RotateUseCase& rotateUseCase,
+                                   LineUseCase& lineUseCase)
+                      : hoverRepo(hoverRepo),
+                        mpuRepo(mpuRepo),
+                        cameraRepo(cameraRepo),
+                        rotateUseCase(rotateUseCase),
+                        lineUseCase(lineUseCase)
+  {
+  }
+
+  [[noreturn]] void run() const
+    {
+        Log.infoln("Starting main program...");
+
+
+        while(true) {
+            hoverRepo.set(10);
+        }
+
+        //rotateUseCase(90.0f, 20.0f, RotateUseCase::SpeedValue{60.0f, 2.0f});
     }
 
-    void run() {
-        Log.infoln(F("Starting main program..."));
-
-        rotateUseCase(90, 20, 60);
-    }
-
-    Result init() {
-        Log.infoln(F("Starting init..."));
+    Result init() const
+    {
+        Log.infoln("Starting init...");
 
         hoverRepo.init();
+        hoverRepo.set(2000);
+        delay(1000);
 
-        Result allInit = Result::Ok;
+        Result allInit = Ok;
 
         allInit = resultAnd(allInit, repeatRun::initMPU(mpuRepo));
 
-        if (allInit == Result::Error) {
-            Log.fatalln(F("Mail init is fatal!"));
+        if (allInit == Error) {
+            Log.fatalln("Mail init is fatal!");
         } else {
-            Log.infoln(F("Main init is success"));
+            Log.infoln("Main init is success");
         }
 
         return allInit;
@@ -44,6 +64,8 @@ public:
 private:
     HoverRepo& hoverRepo;
     MPURepo& mpuRepo;
+    CameraRepo& cameraRepo;
 
     RotateUseCase& rotateUseCase;
+    LineUseCase& lineUseCase;
 };

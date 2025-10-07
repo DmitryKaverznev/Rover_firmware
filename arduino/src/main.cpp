@@ -11,11 +11,12 @@
     Log.begin(LOG_LEVEL_TRACE, &Serial, true);
     Log.infoln("\n\n\n");
 
-    DiContainer diContainer;
-    Result isInit = diContainer.getController()->init();
-    if (isInit == Result::Ok) {
+    const DiContainer diContainer;
+    const Result isInit = diContainer.getController()->init();
+    if (isInit == Ok) {
         diContainer.getController()->run();
     }
+
     Log.infoln("Exit.");
     for(;;);
 }
