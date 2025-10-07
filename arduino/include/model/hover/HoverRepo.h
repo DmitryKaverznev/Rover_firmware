@@ -31,6 +31,11 @@ public:
     }
 
     void set(int16_t speed, int16_t steer = 0) {
+        if (speed > 60) {
+            Log.errorln("SPEED BIG - %d > %d", maxSpeed, speed);
+            speed = 60;
+        }
+
         taskENTER_CRITICAL();
         hoverUp.set(-speed, steer);
         hoverDown.set(speed, steer);
@@ -48,5 +53,7 @@ private:
 
     HoverUnit hoverUp;
     HoverUnit hoverDown;
+
+    const int maxSpeed = 60;
 };
 

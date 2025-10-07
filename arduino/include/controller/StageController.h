@@ -45,7 +45,7 @@ public:
         Log.infoln("Starting init...");
 
         hoverRepo.init();
-        hoverRepo.set(2000);
+        hoverRepo.set(0);
         delay(1000);
 
         Result allInit = Ok;
