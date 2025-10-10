@@ -20,7 +20,7 @@ public:
         int err;
     };
 
-    void run(const Speed speed) const
+    void operator() (const Speed speed) const
     {
         const double midX = getCameraMidX();
 
@@ -32,7 +32,7 @@ public:
         const double lineMid = moveBig.line(midX);
         Log.infoln("LineUseCase -> correction: %D, midX: %D", lineMid, midX);
 
-        hoverRepo.set(speed.target + lineMid, speed.target - lineMid);
+        hoverRepo.set(static_cast<int>(speed.target + lineMid), static_cast<int>(speed.target - lineMid));
     }
 
 private:

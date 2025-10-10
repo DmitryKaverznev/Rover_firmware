@@ -14,7 +14,7 @@
     const DiContainer diContainer;
     const Result isInit = diContainer.getController()->init();
     if (isInit == Ok) {
-        diContainer.getController()->run();
+        diContainer.getController()->runLast();
     }
 
     Log.infoln("Exit.");

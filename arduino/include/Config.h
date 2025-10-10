@@ -15,46 +15,33 @@ namespace settings {
         constexpr int16_t speedMotorCalib = 250;
         constexpr int8_t motorMaxCurr = 25;
     }
-
-    namespace servoCap {
-        constexpr uint8_t open = 90;
-        constexpr uint8_t close = 0;
-    }
-
-    namespace hoverboard {
-        constexpr uint32_t timeSendPeriod = 1000000;
-        constexpr uint8_t speed = 50;
-        constexpr uint8_t rotate180Speed = 100;
-        constexpr uint16_t rotate180Time = 2150;
-        constexpr uint16_t timeMeter = 1500;
-    }
 }
 
 namespace pins {
     namespace motor {
-        constexpr uint8_t dir1 = 2;
-        constexpr uint8_t dir2 = 3;
-        constexpr uint8_t pwm = 4;
-        constexpr uint8_t curr = A11;
-        constexpr uint8_t encDir = 15;
-        constexpr uint8_t encEnc = 14;
+        constexpr uint8_t dir1 = 0;
+        constexpr uint8_t dir2 = 0;
+        constexpr uint8_t pwm = 0;
+        constexpr uint8_t curr = 0;
+        constexpr uint8_t encDir = 0;
+        constexpr uint8_t encInt = 0;
     }
 
     namespace sonar {
-        constexpr uint8_t trigF1 = 9;
-        constexpr uint8_t echoF1 = 8;
-        constexpr uint8_t trigF2 = 6;
-        constexpr uint8_t echoF2 = 5;
-        constexpr uint8_t trigBack = 47;
-        constexpr uint8_t echoBack = 46;
+        constexpr uint8_t trigF1 = 38;
+        constexpr uint8_t echoF1 = 36;
+        constexpr uint8_t trigF2 = 42;
+        constexpr uint8_t echoF2 = 40;
+        constexpr uint8_t trigBack = 46;
+        constexpr uint8_t echoBack = 44;
     }
 
-    constexpr uint8_t servoCap = 17;
+    constexpr uint8_t servoCap = 45;
 
 
     namespace uart {
-        extern HardwareSerial& hoverUp;
-        extern HardwareSerial& hoverDown;
-        extern HardwareSerial& camera;
+        HardwareSerial& hoverUp = Serial3;
+        HardwareSerial& hoverDown = Serial2;
+        HardwareSerial& camera = Serial1;
     }
 }

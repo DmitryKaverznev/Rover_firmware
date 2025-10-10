@@ -18,7 +18,7 @@ public:
         float min;
     };
 
-    [[noreturn]] void operator() (const float angel, const float diff, const SpeedValue speed) const
+    void operator() (const float angel, const float diff, const SpeedValue speed) const
     {
         const Angel start = mpuRepo.getData()[0] * 180/M_PI;
         const AngelCircle circle(start, start + angel, diff);
@@ -26,6 +26,11 @@ public:
         while (true) {
             const Angel now = getYaw();
             rotate(now, circle, speed);
+
+            if (AngelCircle::include(now, start, start + angel + 10)  == AngelCircle::INCLUDE)
+            {
+                return;
+            }
         }
     }
 private:
