@@ -10,20 +10,16 @@ class MPURepo {
 public:
 
     Result init() {
-        Log.infoln(F("MPURepo -> is being initialized..."));
+        Log.infoln("MPURepo -> is being initialized...");
 
-        Result resultInit = mpuInit();
+        const Result resultInit = mpuInit();
 
-
-        if (resultInit == Result::Ok) {
-
-
-            Log.infoln(F("MPURepo -> initialized"));
-            return Result::Ok;
-        } else {
-            Log.fatalln(F("MPURepo -> not initialized"));
-            return Result::Error;
+        if (resultInit == Ok) {
+            Log.infoln("MPURepo -> initialized");
+            return Ok;
         }
+        Log.fatalln("MPURepo -> not initialized");
+        return Error;
     }
 
     float* getData() {
@@ -54,26 +50,26 @@ private:
         Wire.setClock(400000);
 
         if (!mpu.testConnection()) {
-            Log.errorln(F("MPURepo -> MPU6050 error connection"));
-            return Result::Error;
+            Log.errorln("MPURepo -> MPU6050 error connection");
+            return Error;
         }
 
         uint8_t devStatus = mpu.dmpInitialize();
         if (devStatus != 0) {
-            Log.errorln(F("MPURepo -> DMP Initialization failed - code: %d"), devStatus);
-            return Result::Error;
+            Log.errorln("MPURepo -> DMP Initialization failed - code: %d", devStatus);
+            return Error;
         }
 
         mpu.CalibrateAccel(50);
         mpu.CalibrateGyro(50);
         mpu.PrintActiveOffsets();
 
-        Log.infoln(F("Enabling DMP..."));
+        Log.infoln("Enabling DMP...");
         mpu.setDMPEnabled(true);
 
         mpu.getIntStatus();
 
-        Log.infoln(F("MPURepo -> DMP Initialization successful"));
-        return Result::Ok;
+        Log.infoln("MPURepo -> DMP Initialization successful");
+        return Ok;
     }
 };

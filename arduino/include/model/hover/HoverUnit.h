@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include <ArduinoLog.h>
 
 #include "SerialCommand.h"
 
@@ -13,31 +12,33 @@ public:
         _serial.begin(SERIAL_RATE);
     }
 
-    void set(int16_t speed, int16_t steer) {
+    void set(const int16_t speed, const int16_t steer) {
         _route.speed = speed;
         _route.steer = steer;
     }
 
-    void update() {
+    void update() const
+    {
         _send();
     }
 
 private:
     HoverRoute _route;
 
-    static const uint16_t START_FRAME = 0xABCD;
-    static const uint32_t SERIAL_RATE = 115200;
+    static constexpr uint16_t START_FRAME = 0xABCD;
+    static constexpr uint32_t SERIAL_RATE = 115200;
 
     HardwareSerial& _serial;
 
-    void _send() {
+    void _send() const
+    {
         SerialCommand command;
 
-        command.start    = (uint16_t)START_FRAME;
-        command.steer    = (int16_t)_route.steer;
-        command.speed    = (int16_t)_route.speed;
-        command.checksum = (uint16_t)(command.start ^ command.steer ^ command.speed);
+        command.start    = static_cast<uint16_t>(START_FRAME);
+        command.steer    = static_cast<int16_t>(_route.steer);
+        command.speed    = static_cast<int16_t>(_route.speed);
+        command.checksum = static_cast<uint16_t>(command.start ^ command.steer ^ command.speed);
 
-        _serial.write((uint8_t *) &command, sizeof(command));
+        _serial.write(reinterpret_cast<uint8_t*>(&command), sizeof(command));
     }
 };

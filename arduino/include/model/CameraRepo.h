@@ -35,9 +35,7 @@ public:
 private:
     Command _commandNow{};
     void _serialToCommand() {
-        while (_serial.available() == 0) {
-            // Log.traceln("Camera repo -> wait...")
-        }
+        while (_serial.available() == 0) {}
 
         JsonDocument doc;
         String jsonStr = _serial.readStringUntil('\n');

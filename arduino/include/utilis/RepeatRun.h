@@ -5,10 +5,10 @@
 #include "model/MPURepo.h"
 
 namespace repeatRun {
-    Result initMPU(MPURepo& mpuRepo) {
+    inline Result initMPU(MPURepo& mpuRepo) {
         for (int i = 0; i < 50; ++i) {
-            Log.infoln(F("initMPU -> Init mpu attempt %d:\t"), i);
-            Result result = mpuRepo.init();
+            Log.infoln("initMPU -> Init mpu attempt %d:\t", i);
+            const Result result = mpuRepo.init();
             if (result == Result::Ok) {
                 return Result::Ok;
             }

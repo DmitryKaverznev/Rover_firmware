@@ -20,14 +20,14 @@ public:
 
     void operator() (const float angel, const float diff, const SpeedValue speed) const
     {
-        const Angel start = mpuRepo.getData()[0] * 180/M_PI;
-        const AngelCircle circle(start, start + angel, diff);
+        const auto start = mpuRepo.getData()[0] * 180/M_PI;
+        const AngelCircle circle(Angel(start), Angel(start + angel), diff);
 
         while (true) {
-            const Angel now = getYaw();
+            const auto now = Angel(getYaw());
             rotate(now, circle, speed);
 
-            if (AngelCircle::include(now, start, start + angel + 10)  == AngelCircle::INCLUDE)
+            if (AngelCircle::include(now, Angel(start), Angel(start + angel + 10))  == AngelCircle::INCLUDE)
             {
                 return;
             }
@@ -43,6 +43,7 @@ private:
     {
         const AngelState state = circle.getState(now);
         const AngelCircle::AngelCircleStruct data = circle.getData();
+
 
         if (state == START) {
             const SoftMode softMode = {{data.start.get(), static_cast<double>(speed.min)},

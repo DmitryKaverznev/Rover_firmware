@@ -4,7 +4,7 @@
 #include "DiContainer.h"
 #include "utilis/Result.h"
 
-[[noreturn]] void vTaskMain(void *pvParameters) {
+[[noreturn]] void vTaskMain(const void *pvParameters) {
     (void) pvParameters;
 
     Serial.begin(115200);
@@ -14,7 +14,7 @@
     const DiContainer diContainer;
     const Result isInit = diContainer.getController()->init();
     if (isInit == Ok) {
-        diContainer.getController()->runLast();
+        diContainer.getController()->run();
     }
 
     Log.infoln("Exit.");
@@ -23,7 +23,7 @@
 
 void setup() {
     xTaskCreate(
-            vTaskMain,
+            reinterpret_cast<TaskFunction_t>(vTaskMain),
             "Main",
             1024,
             nullptr,

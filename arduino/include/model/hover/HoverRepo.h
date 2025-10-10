@@ -42,7 +42,8 @@ public:
         taskEXIT_CRITICAL();
     }
 
-    void update() {
+    void update() const
+    {
         hoverUp.update();
         hoverDown.update();
     }
