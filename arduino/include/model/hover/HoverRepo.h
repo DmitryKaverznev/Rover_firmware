@@ -58,3 +58,14 @@ private:
     const int maxSpeed = 60;
 };
 
+[[noreturn]] inline void vTaskHover(void *pvParameters) {
+    auto* repo = static_cast<HoverRepo*>(pvParameters);
+
+    for(;;)
+    {
+        taskENTER_CRITICAL();
+        repo->update();
+        taskEXIT_CRITICAL();
+        delay(100);
+    }
+}

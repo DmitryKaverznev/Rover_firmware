@@ -2,8 +2,8 @@
 
 #include "model/MPURepo.h"
 #include "model/hover/HoverRepo.h"
-
 #include "utilis/AngelUtility .h"
+
 #include "utilis/SoftMode.h"
 
 class RotateUseCase {
@@ -18,21 +18,27 @@ public:
         float min;
     };
 
-    void operator() (const float angel, const float diff, const SpeedValue speed) const
+    void operator() (const float angle, const float diff, const SpeedValue speed) const
     {
-        const auto start = mpuRepo.getData()[0] * 180/M_PI;
-        const AngelCircle circle(Angel(start), Angel(start + angel), diff);
+        const float baseAngle = getYaw();
+        const AngelCircle circle(Angel(0.0f), Angel(angle), diff);
 
         while (true) {
-            const auto now = Angel(getYaw());
+            const float currentAngle = getYaw() - baseAngle;
+            const Angel now(currentAngle);
+
             rotate(now, circle, speed);
 
-            if (AngelCircle::include(now, Angel(start), Angel(start + angel + 10))  == AngelCircle::INCLUDE)
-            {
-                return;
+            Log.infoln("RotateUseCase -> angle: %f", fabs(currentAngle));
+
+            if (fabs(currentAngle) >= angle) {
+                break;
             }
         }
+
+        hoverRepo.set(0);
     }
+
 private:
     float getYaw() const
     {
@@ -44,23 +50,22 @@ private:
         const AngelState state = circle.getState(now);
         const AngelCircle::AngelCircleStruct data = circle.getData();
 
-
         if (state == START) {
-            const SoftMode softMode = {{data.start.get(), static_cast<double>(speed.min)},
-                                 {data.startStep.get(), static_cast<double>(speed.max)}};
+            const SoftMode softMode = {
+                {data.start.get(), static_cast<double>(speed.min)},
+                {data.startStep.get(), static_cast<double>(speed.max)}
+            };
             hoverRepo.set(0, static_cast<int>(softMode.line(now.get())));
-            Log.traceln("RotateUseCase -> speed: %D", softMode.line(now.get()));
         } else if (state == MAIN) {
             hoverRepo.set(0, static_cast<int>(speed.max));
-            Log.traceln("RotateUseCase -> speed: %D", static_cast<double>(speed.max));
         } else if (state == END) {
-            const SoftMode softMode = {{data.end.get(), static_cast<double>(speed.min)},
-                                 {data.endStep.get(), static_cast<double>(speed.max)}};
+            const SoftMode softMode = {
+                {data.end.get(), static_cast<double>(speed.min)},
+                {data.endStep.get(), static_cast<double>(speed.max)}
+            };
             hoverRepo.set(0, static_cast<int>(softMode.line(now.get())));
-            Log.traceln("RotateUseCase -> speed: %D", (softMode.line(now.get())));
         } else {
             hoverRepo.set(0, static_cast<int>(speed.max / 10));
-            Log.traceln("RotateUseCase -> speed: %D", static_cast<double>(speed.max));
         }
     }
 

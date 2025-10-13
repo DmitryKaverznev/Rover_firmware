@@ -30,10 +30,10 @@ namespace pins {
     namespace sonar {
         constexpr uint8_t trigF1 = 38;
         constexpr uint8_t echoF1 = 36;
-        constexpr uint8_t trigF2 = 42;
-        constexpr uint8_t echoF2 = 40;
-        constexpr uint8_t trigBack = 46;
-        constexpr uint8_t echoBack = 44;
+        constexpr uint8_t trigF2 = 46;
+        constexpr uint8_t echoF2 = 44;
+        constexpr uint8_t trigBack = 42;
+        constexpr uint8_t echoBack = 40;
     }
 
     constexpr uint8_t servoCap = 45;

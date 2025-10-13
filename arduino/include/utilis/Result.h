@@ -5,4 +5,9 @@ enum Result {
     Error
 };
 
-Result resultAnd(Result lhs, Result rhs);
+inline Result resultAnd(const Result lhs, const Result rhs) {
+    if (lhs == Ok && rhs == Ok) {
+        return Ok;
+    }
+    return Error;
+}
