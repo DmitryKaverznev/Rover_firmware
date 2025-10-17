@@ -3,6 +3,7 @@
 #include <ArduinoLog.h>
 #include <Arduino_FreeRTOS.h>
 
+#include "Config.h"
 #include "HoverUnit.h"
 
 [[noreturn]] void vTaskHover(void *pvParameters);
@@ -57,6 +58,10 @@ private:
 
     const int maxSpeed = 60;
 };
+
+HoverRepo instanceOfHoverRepo(pins::uart::hoverUp, pins::uart::hoverDown);
+inline HoverRepo* getImplementationOfHoverRepo() { return &instanceOfHoverRepo; }
+
 
 [[noreturn]] inline void vTaskHover(void *pvParameters) {
     auto* repo = static_cast<HoverRepo*>(pvParameters);

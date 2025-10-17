@@ -36,7 +36,7 @@ namespace pins {
         constexpr uint8_t echoBack = 40;
     }
 
-    constexpr uint8_t servoCap = 45;
+    constexpr uint8_t servoCap = 12;
 
 
     namespace uart {

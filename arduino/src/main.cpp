@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <Arduino_FreeRTOS.h>
 
-#include "DiContainer.h"
+#include "ArduinoLog.h"
+#include "controller/StageController.h"
 #include "utilis/Result.h"
 
 [[noreturn]] void vTaskMain(const void *pvParameters) {
@@ -11,10 +12,11 @@
     Log.begin(LOG_LEVEL_TRACE, &Serial, true);
     Log.infoln("\n\n\n");
 
-    const DiContainer diContainer;
-    const Result isInit = diContainer.getController()->init();
+    const StageController* stageController = IO_INJECT(StageController);
+
+    const Result isInit = stageController->init();
     if (isInit == Ok) {
-        diContainer.getController()->run();
+        stageController->run();
     }
 
     Log.infoln("Exit.");

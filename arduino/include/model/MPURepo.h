@@ -5,6 +5,8 @@
 #include "utilis/Result.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
+#include "portmacro.h"
+#include "task.h"
 
 class MPURepo {
 public:
@@ -54,7 +56,7 @@ private:
             return Error;
         }
 
-        uint8_t devStatus = mpu.dmpInitialize();
+        const uint8_t devStatus = mpu.dmpInitialize();
         if (devStatus != 0) {
             Log.errorln("MPURepo -> DMP Initialization failed - code: %d", devStatus);
             return Error;
@@ -73,3 +75,6 @@ private:
         return Ok;
     }
 };
+
+MPURepo instanceOfMPURepo;
+inline MPURepo* getImplementationOfMPURepo() { return &instanceOfMPURepo; }

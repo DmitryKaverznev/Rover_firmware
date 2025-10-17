@@ -1,5 +1,6 @@
 #pragma once
 
+#include "io_di.h"
 #include "model/MPURepo.h"
 #include "model/hover/HoverRepo.h"
 #include "utilis/AngelUtility .h"
@@ -8,17 +9,12 @@
 
 class RotateUseCase {
 public:
-    RotateUseCase(MPURepo& mpuRepo, HoverRepo& hoverRepo) :
-        mpuRepo(mpuRepo),
-        hoverRepo(hoverRepo) {
-    }
-
     struct SpeedValue {
         float max;
         float min;
     };
 
-    void operator() (const float angle, const float diff, const SpeedValue speed) const
+    void run(const float angle, const float diff, const SpeedValue speed) const
     {
         const float baseAngle = getYaw();
         const AngelCircle circle(Angel(0.0f), Angel(angle), diff);
@@ -36,13 +32,13 @@ public:
             }
         }
 
-        hoverRepo.set(0);
+        hoverRepo->set(0);
     }
 
 private:
     float getYaw() const
     {
-        return mpuRepo.getData()[0] * 180 / M_PI;
+        return mpuRepo->getData()[0] * 180 / M_PI;
     }
 
     void rotate(const Angel now, AngelCircle circle, const SpeedValue speed) const
@@ -55,20 +51,23 @@ private:
                 {data.start.get(), static_cast<double>(speed.min)},
                 {data.startStep.get(), static_cast<double>(speed.max)}
             };
-            hoverRepo.set(0, static_cast<int>(softMode.line(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
         } else if (state == MAIN) {
-            hoverRepo.set(0, static_cast<int>(speed.max));
+            hoverRepo->set(0, static_cast<int>(speed.max));
         } else if (state == END) {
             const SoftMode softMode = {
                 {data.end.get(), static_cast<double>(speed.min)},
                 {data.endStep.get(), static_cast<double>(speed.max)}
             };
-            hoverRepo.set(0, static_cast<int>(softMode.line(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
         } else {
-            hoverRepo.set(0, static_cast<int>(speed.max / 10));
+            hoverRepo->set(0, static_cast<int>(speed.max / 10));
         }
     }
 
-    MPURepo& mpuRepo;
-    HoverRepo& hoverRepo;
+    MPURepo* mpuRepo = IO_INJECT(MPURepo);
+    HoverRepo* hoverRepo = IO_INJECT(HoverRepo);
 };
+
+RotateUseCase instanceOfRotateUseCase;
+inline RotateUseCase* getImplementationOfRotateUseCase() { return &instanceOfRotateUseCase; }

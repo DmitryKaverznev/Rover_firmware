@@ -1,5 +1,6 @@
 #pragma once
 
+#include "io_di.h"
 #include "model/CameraRepo.h"
 #include "model/hover/HoverRepo.h"
 #include "utilis/Dot.h"
@@ -8,20 +9,13 @@
 class LineUseCase
 {
 public:
-    LineUseCase(
-        CameraRepo& camera_repo,
-        HoverRepo& hover_repo) :
-            hoverRepo(hover_repo),
-            cameraRepo(camera_repo) {
-    }
-
     struct Speed
     {
         int target;
         int err;
     };
 
-    void operator() (const Speed speed) const
+    void run(const Speed speed) const
     {
         const double midX = getCameraMidX();
 
@@ -33,17 +27,17 @@ public:
         const double lineMid = moveBig.line(midX);
         Log.infoln("LineUseCase -> correction: %D, midX: %D", lineMid, midX);
 
-        hoverRepo.set(static_cast<int>(speed.target + lineMid), static_cast<int>(speed.target - lineMid));
+        hoverRepo->set(static_cast<int>(speed.target + lineMid), static_cast<int>(speed.target - lineMid));
     }
 
 private:
-    HoverRepo& hoverRepo;
-    CameraRepo& cameraRepo;
+    HoverRepo* hoverRepo = IO_INJECT(HoverRepo);
+    CameraRepo* cameraRepo = IO_INJECT(CameraRepo);
 
     double getCameraMidX() const
     {
-        cameraRepo.update();
-        const CameraRepo::Command data = cameraRepo.getData();
+        cameraRepo->update();
+        const CameraRepo::Command data = cameraRepo->getData();
         auto mid = (data.start.x + data.end.y) / 2;
         if (mid > maxCamera)
             mid = maxCamera;
@@ -56,3 +50,6 @@ private:
     const int minCamera = 5;
     const int maxCamera = 320;
 };
+
+LineUseCase instanceOfLineUseCase;
+inline LineUseCase* getImplementationOfLineUseCase() { return &instanceOfLineUseCase; }

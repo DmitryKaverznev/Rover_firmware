@@ -5,6 +5,8 @@
 #include <semphr.h>
 #include <ace_sorting/shellSort.h>
 
+#include "Config.h"
+
 [[noreturn]] void vTaskSonar(void *pvParameters);
 
 class SonarUnit
@@ -91,3 +93,11 @@ private:
         delay(50);
     }
 }
+
+
+SonarUnit instanceOfSonarUnitUp1(pins::sonar::trigF1, pins::sonar::echoF1);
+inline SonarUnit* getImplementationOfSonarUnitUp1() { return &instanceOfSonarUnitUp1; }
+SonarUnit instanceOfSonarUnitUp2(pins::sonar::trigF2, pins::sonar::echoF2);
+inline SonarUnit* getImplementationOfSonarUnitUp2() { return &instanceOfSonarUnitUp2; }
+SonarUnit instanceOfSonarUnitDown(pins::sonar::trigBack, pins::sonar::echoBack);
+inline SonarUnit* getImplementationOfSonarUnitDown() { return &instanceOfSonarUnitDown; }

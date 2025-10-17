@@ -4,6 +4,7 @@
 #include <ArduinoJson.h>
 #include <ArduinoLog.h>
 
+#include "Config.h"
 #include "utilis/Dot.h"
 
 class CameraRepo {
@@ -54,3 +55,6 @@ private:
 
     HardwareSerial& _serial;
 };
+
+CameraRepo instanceOfCameraRepo(pins::uart::camera);
+inline CameraRepo* getImplementationOfCameraRepo() { return &instanceOfCameraRepo; }
