@@ -10,7 +10,6 @@
 
 class MPURepo {
 public:
-
     Result init() {
         Log.infoln("MPURepo -> is being initialized...");
 

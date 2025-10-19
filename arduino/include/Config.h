@@ -9,22 +9,17 @@ namespace settings {
 
     constexpr uint16_t sonarDist = 30;
 
-    namespace motor {
-        constexpr uint16_t timeOpen = 5300;
-        constexpr uint16_t speedOpen = 250;
-        constexpr int16_t speedMotorCalib = 250;
-        constexpr int8_t motorMaxCurr = 25;
-    }
+
 }
 
 namespace pins {
     namespace motor {
-        constexpr uint8_t dir1 = 0;
-        constexpr uint8_t dir2 = 0;
-        constexpr uint8_t pwm = 0;
-        constexpr uint8_t curr = 0;
-        constexpr uint8_t encDir = 0;
-        constexpr uint8_t encInt = 0;
+        constexpr uint8_t dir1 = A10;
+        constexpr uint8_t dir2 = A12;
+        constexpr uint8_t pwm = 13;
+        constexpr uint8_t curr = A14;
+        constexpr uint8_t encDir = A6;
+        constexpr uint8_t encInt = A8;
     }
 
     namespace sonar {

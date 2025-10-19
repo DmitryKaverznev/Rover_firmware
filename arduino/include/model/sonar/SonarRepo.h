@@ -12,15 +12,10 @@ public:
 
     uint16_t getMultyForward() const
     {
-        const uint16_t dist1 = _sonarForward1->readAverage();
-        const uint16_t dist2 = _sonarForward2->readAverage();
+        const uint16_t dist1 = _sonarForward1->readMedian();
+        const uint16_t dist2 = _sonarForward2->readMedian();
 
-        if (dist1 == 0)
-            return dist2;
-        if (dist2 == 0)
-            return dist1;
-
-        return (dist1 + dist2) / 2;
+        return min(dist1, dist2);
     }
 
 private:

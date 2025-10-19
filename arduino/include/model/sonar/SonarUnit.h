@@ -32,7 +32,7 @@ public:
     }
 
 
-    uint16_t readAverage()
+    uint16_t readMedian()
     {
         xSemaphoreTake(_mutex, portMAX_DELAY);
         ace_sorting::shellSortKnuth(_dists, BUFFER_SIZE);
@@ -66,13 +66,19 @@ public:
         delayMicroseconds(10);
         digitalWrite(_pinTrig, LOW);
 
-        const uint16_t duration = pulseIn(_pinEcho, HIGH, 2500);
+        const uint32_t timeout = MAX_DISTANCE * 58;
+        const uint16_t duration = pulseIn(_pinEcho, HIGH, timeout);
+
+        if (duration == 0) {
+            return MAX_DISTANCE;
+        }
         return duration / 58;
     }
 private:
     static constexpr uint8_t BUFFER_SIZE = 5;
     uint8_t _index = 0;
     uint16_t _dists[BUFFER_SIZE] = {};
+    uint16_t MAX_DISTANCE = 50;
 
     uint16_t _pinTrig;
     uint16_t _pinEcho;
