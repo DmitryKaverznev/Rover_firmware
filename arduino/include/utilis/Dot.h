@@ -1,11 +1,9 @@
 #pragma once
 
-struct Dot {
-    double x;
-    double y;
-};
-
-struct DotInt {
-    int x;
-    int y;
-};
+namespace dot {
+    template <typename T>
+    struct Dot {
+            T x;
+            T y;
+        };
+}

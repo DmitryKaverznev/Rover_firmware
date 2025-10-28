@@ -6,17 +6,25 @@
 
 #include "Config.h"
 #include "utilis/Dot.h"
+#pragma once
 
+[[noreturn]] inline void vTaskCamera(void *pvParameters);
 class CameraRepo {
 public:
     explicit CameraRepo(HardwareSerial& serial)
         : _serial(serial) {
         _serial.begin(115200);
+
+        xTaskCreate(vTaskCamera,
+            "Camera",
+            configMINIMAL_STACK_SIZE,
+            this,
+            1, nullptr);
     }
 
     struct Command {
-        DotInt start;
-        DotInt end;
+        dot::Dot<int32_t>  start;
+        dot::Dot<int32_t> end;
     };
 
     void update() {
@@ -36,7 +44,9 @@ public:
 private:
     Command _commandNow{};
     void _serialToCommand() {
-        while (_serial.available() == 0) {}
+        if (_serial.available() == 0) {
+            return;
+        }
 
         JsonDocument doc;
         String jsonStr = _serial.readStringUntil('\n');
@@ -58,3 +68,16 @@ private:
 
 CameraRepo instanceOfCameraRepo(pins::uart::camera);
 inline CameraRepo* getImplementationOfCameraRepo() { return &instanceOfCameraRepo; }
+
+
+[[noreturn]] inline void vTaskCamera(void *pvParameters) {
+    auto* repo = static_cast<CameraRepo*>(pvParameters);
+
+    for (;;) {
+        taskENTER_CRITICAL();
+        repo->update();
+        taskEXIT_CRITICAL();
+
+        delay(50);
+    }
+}

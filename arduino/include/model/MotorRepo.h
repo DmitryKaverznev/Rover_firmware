@@ -16,18 +16,21 @@ public:
               const uint8_t pinDir2,
               const uint8_t pinEncDir,
               const uint8_t pinEncInterrupt,
-              const uint8_t pinCurr) : _pinPwm(pinPwm),
+              const uint8_t pinCurr,
+              const uint8_t pinBtn) : _pinPwm(pinPwm),
                                        _pinDir1(pinDir1),
                                        _pinDir2(pinDir2),
                                        _pinEncDir(pinEncDir),
                                        _pinEncInterrupt(pinEncInterrupt),
-                                       _pinCurr(pinCurr)
+                                       _pinCurr(pinCurr),
+                                       _pinBtn(pinBtn)
     {
         pinMode(_pinPwm, OUTPUT);
         pinMode(_pinDir1, OUTPUT);
         pinMode(_pinDir2, OUTPUT);
         pinMode(_pinEncDir, INPUT);
         pinMode(_pinEncInterrupt, INPUT);
+        pinMode(_pinBtn, INPUT_PULLUP);
 
         attachInterrupt(digitalPinToInterrupt(_pinEncInterrupt), []
         {
@@ -47,8 +50,10 @@ public:
 
     void encoderInterrupt()
     {
-        Log.infoln("encoderInterrupt");
-        _updateInc();
+        if (digitalRead(_pinEncDir))
+            _enc++;
+        else
+            _enc--;
     }
 
     int16_t getEnc() const
@@ -63,7 +68,7 @@ public:
 
     uint16_t getCurr()
     {
-        _updateCurr();
+        _curr = analogRead(_pinCurr);
         return _curr;
     }
 
@@ -77,24 +82,42 @@ public:
     {
         while (abs(getEnc()) < time) {
             set(speed);
-            Log.infoln("MotorRepo -> %d", _enc);
+            Log.infoln("MotorRepo -> %d %d", _enc, _curr);
         }
+    }
+
+    bool getBtn() const
+    {
+        return ! digitalRead(_pinBtn);
     }
 
     void calibration()
     {
         encReset();
-        set(Settings::SPEED_CALIBRATION);
-        delay(Settings::DELAY_CALIBRATION_1);
         set(-Settings::SPEED_CALIBRATION);
-        delay(Settings::DELAY_CALIBRATION_2);
-        /*while (getCurr() < Settings::CURRENT_THRESHOLD)
+        const uint32_t startTime = millis();
+
+        // Цикл работает, пока не будет нажата кнопка ИЛИ не наступит таймаут по току
+        while (true)
         {
-            Log.info("MotorRepo -> Curr: %D", getCurr());
-        }*/
+            if (getBtn())
+            {
+                break;
+            }
+
+            if (getCurr() > Settings::CURR_MAX)
+            {
+                if ((millis() - startTime) >= 2000)
+                {
+                    break;
+                }
+            }
+        }
+
         set(0);
         encReset();
     }
+
 
 private:
     uint8_t _pinPwm;
@@ -103,6 +126,7 @@ private:
     uint8_t _pinEncDir;
     uint8_t _pinEncInterrupt;
     uint8_t _pinCurr;
+    uint8_t _pinBtn;
 
     int16_t _enc = 0;
     uint16_t _curr = 0;
@@ -114,24 +138,10 @@ private:
         static constexpr int8_t CURRENT_THRESHOLD = 28;
         static constexpr int16_t DELAY_CALIBRATION_1 = 1000;
         static constexpr int16_t DELAY_CALIBRATION_2 = 250;
-        static constexpr uint16_t TIME_OPEN = 5300;
+        static constexpr uint16_t TIME_OPEN = 5600;
         static constexpr uint16_t SPEED_OPEN = 250;
         static constexpr int16_t SPEED_CALIBRATION = 250;
     };
-
-
-    void _updateInc()
-    {
-        if (digitalRead(_pinEncDir))
-            _enc++;
-        else
-            _enc--;
-    }
-
-    void _updateCurr()
-    {
-        _curr = analogRead(_pinCurr);
-    }
 };
 
 MotorRepo instanceOfMotorRepo(
@@ -140,6 +150,7 @@ MotorRepo instanceOfMotorRepo(
     pins::motor::dir2,
     pins::motor::encDir,
     pins::motor::encInt,
-    pins::motor::curr
+    pins::motor::curr,
+    pins::motor::btn
 );
 inline MotorRepo* getImplementationOfMotorRepo() { return &instanceOfMotorRepo; }

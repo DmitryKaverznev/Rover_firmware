@@ -18,8 +18,9 @@ namespace pins {
         constexpr uint8_t dir2 = A12;
         constexpr uint8_t pwm = 13;
         constexpr uint8_t curr = A14;
-        constexpr uint8_t encDir = A6;
-        constexpr uint8_t encInt = A8;
+        constexpr uint8_t encDir = 60;
+        constexpr uint8_t encInt = 2;
+        constexpr uint8_t btn = 47;
     }
 
     namespace sonar {

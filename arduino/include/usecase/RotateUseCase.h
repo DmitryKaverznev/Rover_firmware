@@ -3,9 +3,17 @@
 #include "io_di.h"
 #include "model/MPURepo.h"
 #include "model/hover/HoverRepo.h"
-#include "utilis/AngelUtility .h"
-
 #include "utilis/SoftMode.h"
+
+static void motor_run_callback(const double value) {
+    HoverRepo* hoverRepo = IO_INJECT(HoverRepo);
+    hoverRepo->set(0, static_cast<int>(value));
+}
+
+static double orientation_get_callback() {
+    MPURepo* mpuRepo = IO_INJECT(MPURepo);
+    return mpuRepo->getData()[0] * 180 / M_PI;
+}
 
 class RotateUseCase {
 public:
@@ -16,53 +24,24 @@ public:
 
     void run(const float angle, const float diff, const SpeedValue speed) const
     {
-        const float baseAngle = getYaw();
-        const AngelCircle circle(Angel(0.0f), Angel(angle), diff);
+        const float startAngle = getYaw();
+        const float targetAngle = startAngle + angle;
 
-        while (true) {
-            const float currentAngle = getYaw() - baseAngle;
-            const Angel now(currentAngle);
+        SoftTimeMotion::Parameters params;
+        params.run = &motor_run_callback;
+        params.getValue = &orientation_get_callback;
+        params.target = targetAngle;
+        params.accelerationRange = diff;
+        params.minOutput = speed.min;
+        params.maxOutput = speed.max;
+        params.errorOutput = 0;
 
-            rotate(now, circle, speed);
-
-            Log.infoln("RotateUseCase -> angle: %f", fabs(currentAngle));
-
-            if (fabs(currentAngle) >= angle) {
-                break;
-            }
-        }
-
-        hoverRepo->set(0);
+        SoftTimeMotion::run(params);
     }
 
 private:
-    float getYaw() const
-    {
+    float getYaw() const {
         return mpuRepo->getData()[0] * 180 / M_PI;
-    }
-
-    void rotate(const Angel now, AngelCircle circle, const SpeedValue speed) const
-    {
-        const AngelState state = circle.getState(now);
-        const AngelCircle::AngelCircleStruct data = circle.getData();
-
-        if (state == START) {
-            const SoftMode softMode = {
-                {data.start.get(), static_cast<double>(speed.min)},
-                {data.startStep.get(), static_cast<double>(speed.max)}
-            };
-            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
-        } else if (state == MAIN) {
-            hoverRepo->set(0, static_cast<int>(speed.max));
-        } else if (state == END) {
-            const SoftMode softMode = {
-                {data.end.get(), static_cast<double>(speed.min)},
-                {data.endStep.get(), static_cast<double>(speed.max)}
-            };
-            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
-        } else {
-            hoverRepo->set(0, static_cast<int>(speed.max / 10));
-        }
     }
 
     MPURepo* mpuRepo = IO_INJECT(MPURepo);
