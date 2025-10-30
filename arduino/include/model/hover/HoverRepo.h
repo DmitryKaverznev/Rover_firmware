@@ -32,10 +32,15 @@ public:
     }
 
     void set(int16_t speed, int16_t steer = 0) {
-        if (speed > 60) {
+        if (speed > maxSpeed) {
             Log.errorln("SPEED BIG - %d > %d", maxSpeed, speed);
-            speed = 60;
+            speed = maxSpeed;
         }
+        if (steer > maxSpeed) {
+            Log.errorln("STEER BIG - %d > %d", maxSpeed, steer);
+            steer = maxSpeed;
+        }
+
 
         taskENTER_CRITICAL();
         hoverUp.set(-speed, steer);

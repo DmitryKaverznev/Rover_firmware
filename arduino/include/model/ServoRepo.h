@@ -77,7 +77,7 @@ inline void vTaskServo(void *pvParameters) {
     const uint32_t startPos = (pv->state == ServoRepo::OPEN) ? ServoRepo::posClose : ServoRepo::posOpen;
     const uint32_t endPos   = (pv->state == ServoRepo::OPEN) ? ServoRepo::posOpen  : ServoRepo::posClose;
 
-    const SoftMode move(
+    const ControlMathManager move(
         {0.0, static_cast<double>(startPos)},
         {static_cast<double>(pv->time), static_cast<double>(endPos)}
     );
@@ -90,7 +90,7 @@ inline void vTaskServo(void *pvParameters) {
             break;
         }
 
-        double pos = move.line(static_cast<uint16_t>(elapsedMs));
+        double pos = move.control_P(static_cast<uint16_t>(elapsedMs));
         if (pos < 0) pos = 0;
         if (pos > 180) pos = 180;
 

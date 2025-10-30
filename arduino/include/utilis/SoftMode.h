@@ -4,17 +4,36 @@
 #include <ArduinoLog.h>
 #include <Arduino.h>
 
-class SoftMode {
+class ControlMathManager {
 public:
-    SoftMode(const dot::Dot<double>& start, const dot::Dot<double>& stop) :
+    ControlMathManager(const dot::Dot<double>& start, const dot::Dot<double>& stop) :
             start(start),
             stop(stop) {
     }
 
-    double line(const double x) const {
+    enum Mode {
+        ALL,
+        INCLUDE,
+        ZERO
+    };
+
+    double control_P(const double x, const Mode mode = ALL) const {
         if (stop.x == start.x) return start.y;
-        const double incline = (stop.y - start.y) / (stop.x - start.x);
-        return start.y + (x - start.x) * incline;
+        const double k = (stop.y - start.y) / (stop.x - start.x);
+        double value = start.y + (x - start.x) * k;
+
+        if (mode == ALL)
+            return value;
+        if (mode == INCLUDE) {
+            value = max(value, start.y);
+            value = min(value, stop.y);
+        }
+        if (mode == ZERO) {
+            value = max(value, -stop.y);
+            value = min(value, stop.y);
+        }
+
+        return value;
     }
 
 private:
@@ -80,19 +99,19 @@ inline void run(const Parameters& params) {
 
         if ((isForward && currentValue < accelEnd) || (!isForward && currentValue > accelEnd)) {
             // Разгон
-            SoftMode accelMode(
+            ControlMathManager accelMode(
                 {accelStart, isForward ? params.minOutput : -params.minOutput},
                 {accelEnd,   isForward ? params.maxOutput : -params.maxOutput}
             );
-            output = accelMode.line(currentValue);
+            output = accelMode.control_P(currentValue);
         }
         else if ((isForward && currentValue >= decelStart) || (!isForward && currentValue <= decelStart)) {
             // Торможение
-            SoftMode decelMode(
+            ControlMathManager decelMode(
                 {decelStart, isForward ? params.maxOutput : -params.maxOutput},
                 {decelEnd,   isForward ? params.minOutput : -params.minOutput}
             );
-            output = decelMode.line(currentValue);
+            output = decelMode.control_P(currentValue);
         }
         else {
             // Круиз
