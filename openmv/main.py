@@ -2,9 +2,14 @@ import sensor
 import math
 import json
 from pyb import UART
+import time
+from machine import LED
 
 uart = UART(3, 115200)
+led = LED("LED_GREEN")
 
+last_blink_time = time.ticks_ms()
+led_state = False
 
 def line_length(line):
     x1, y1, x2, y2 = line
@@ -12,7 +17,7 @@ def line_length(line):
 
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
-sensor.set_framesize(sensor.QVGA)
+sensor.set_framesize(sensor.QQVGA)
 sensor.skip_frames(time=2000)
 
 def getLineDots():
@@ -26,7 +31,7 @@ def getLineDots():
 
         major_axis_line = largest_blob.major_axis_line()
 
-        img.draw_rectangle(largest_blob.rect(), [0, 255, 0])
+        img.draw_rectangle(largest_blob.rect(),[0, 255, 0])
         img.draw_cross(largest_blob.cx(), largest_blob.cy(), [128, 0, 128], 5, -1)
 
 
@@ -42,30 +47,31 @@ def getLineDots():
 
         return major_axis_line
 
-def toJson(line):
-    if line is None:
-        return -1;
-    x1, y1, x2, y2 = line
-    data = {
-        "x1": x1,
-        "y1": y1,
-        "x2": x2,
-        "y2": y2,
+def toJson(data):
+    if data is None:
+        return -1
+    jsonData = {
+        "data": data
     }
-    return json.dumps(data)
+    return json.dumps(jsonData)
 
 
 while(True):
     img = sensor.snapshot()
     img = img.rotation_corr(vflip=True)
 
-    img = img.to_grayscale()
-    img = img.binary([(0, 50)])
-    img.erode(2)
-    img.dilate(1)
 
-    line = getLineDots()
-    jsonData = toJson(line)
 
-    if (jsonData != -1):
+    for tag in img.find_apriltags():
+        img.draw_rectangle(tag.rect, color=(255, 0, 0))
+        img.draw_cross(tag.cx, tag.cy, color=(0, 255, 0))
+        jsonData = toJson(tag.id)
         uart.write(jsonData + '\n')
+
+    if time.ticks_diff(time.ticks_ms(), last_blink_time) > 250:
+        last_blink_time = time.ticks_ms()
+        led_state = not led_state
+        if led_state:
+            led.on()
+        else:
+            led.off()

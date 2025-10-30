@@ -104,14 +104,14 @@ public:
             {
                 break;
             }
-
+/*
             if (getCurr() > Settings::CURR_MAX)
             {
                 if ((millis() - startTime) >= 2000)
                 {
                     break;
                 }
-            }
+            }*/
         }
 
         set(0);
@@ -138,7 +138,7 @@ private:
         static constexpr int8_t CURRENT_THRESHOLD = 28;
         static constexpr int16_t DELAY_CALIBRATION_1 = 1000;
         static constexpr int16_t DELAY_CALIBRATION_2 = 250;
-        static constexpr uint16_t TIME_OPEN = 5600;
+        static constexpr uint16_t TIME_OPEN = 7500;
         static constexpr uint16_t SPEED_OPEN = 250;
         static constexpr int16_t SPEED_CALIBRATION = 250;
     };

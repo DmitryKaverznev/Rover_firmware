@@ -10,6 +10,7 @@
 #include "model/ServoRepo.h"
 #include "model/sonar/SonarRepo.h"
 #include "usecase/HoverGoSonarUseCase.h"
+#include "usecase/HoverSoftMoveUseCase.h"
 
 #include "usecase/RotateUseCase.h"
 #include "usecase/SonarWaitUseCase.h"
@@ -19,54 +20,50 @@
 
 class StageController {
 public:
-    [[noreturn]] void run() const
+    void run() const
   {
-      Log.infoln("Starting main program...");
+        Log.infoln("Starting main program...");
 
-        while (true) {
-            const CameraRepo::Command command = cameraRepo->getData();
-            Log.infoln("%d %d %d %d", command.start.x, command.start.y, command.end.x, command.end.y);
-        }
-/*
-        while (true)
-        {
-            rotateUseCase->run(180, 20, {50, 5});
-            hoverRepo->set(0);
-            delay(3000);
-        }
-/*
         sonarBackWaitUseCase->run();
-        hoverRepo->set(60);
+        hoverSoftMoveUseCase->run(3000, {0, 50}); // ждём человека
 
-
-        hoverGoSonarUseCase->run();
+        const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(); // едем до домика
+        if (status1 == HoverGoSonarUseCase::CAMERA) {
+            hoverRepo->set(50);
+            hoverSoftMoveUseCase->run(1000, {50, 0});
+            hoverRepo->set(0);
+        }
         hoverRepo->set(0);
-        delay(1000);
-        hoverRepo->set(-50);
-        delay(1000);
-        hoverRepo->set(0);
-        rotateUseCase->run(180, 20, {50, 5});
-        delay(1000);
-        hoverRepo->set(50);
-        hoverGoSonarUseCase->run();
-        hoverRepo->set(0);
-        delay(1000);
-        hoverRepo->set(-50);
-        delay(1000);
-        hoverRepo->set(0);
-        rotateUseCase->run(180, 20, {30, 5});
         delay(1000);
 
-        hoverRepo->set(40);
-        delay(2000);
+        hoverSoftMoveUseCase->run(250, {0, -50});
+        hoverSoftMoveUseCase->run(250, {-50, 0});
 
+        rotateUseCase->run(180, 20, {50, 7}); // разворачиваемся
+        delay(500);
+
+        hoverSoftMoveUseCase->run(3500, {0, 50});
+
+        const HoverGoSonarUseCase::StatusReturn status2 = hoverGoSonarUseCase->run(); // едем до домика
+        if (status2 == HoverGoSonarUseCase::CAMERA) {
+            hoverRepo->set(50);
+            hoverSoftMoveUseCase->run(1000, {50, 0});
+            hoverRepo->set(0);
+        }
+
+        hoverSoftMoveUseCase->run(500, {0, -50});
+        delay(1500);
         hoverRepo->set(0);
+
+        delay(2500);
 
         servoRepo->init();
 
         servoRepo->move(ServoRepo::OPEN, 2000);
         delay(2500);
-        motorRepo->up();*/
+        motorRepo->up();
+
+        //*/
     }
 
     Result init() const
@@ -106,6 +103,7 @@ private:
     RotateUseCase* rotateUseCase = IO_INJECT(RotateUseCase);
     HoverGoSonarUseCase* hoverGoSonarUseCase = IO_INJECT(HoverGoSonarUseCase);
     SonarBackWaitUseCase* sonarBackWaitUseCase = IO_INJECT(SonarBackWaitUseCase);
+    HoverSoftMoveUseCase* hoverSoftMoveUseCase = IO_INJECT(HoverSoftMoveUseCase);
 };
 
 StageController instanceOfStageController;

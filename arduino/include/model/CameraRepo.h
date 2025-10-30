@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <ArduinoLog.h>
-
+#include <Arduino_FreeRTOS.h>
 #include "Config.h"
 #include "utilis/Dot.h"
 #pragma once
@@ -14,31 +14,25 @@ public:
     explicit CameraRepo(HardwareSerial& serial)
         : _serial(serial) {
         _serial.begin(115200);
-
-        xTaskCreate(vTaskCamera,
-            "Camera",
-            configMINIMAL_STACK_SIZE,
-            this,
-            1, nullptr);
     }
 
     struct Command {
-        dot::Dot<int32_t>  start;
-        dot::Dot<int32_t> end;
+        int32_t  data;
     };
 
     void update() {
         _serialToCommand();
     }
 
-    Command& getData() {
-        return _commandNow;
+    void clear() {
+        _commandNow = {};
+        while (_serial.available()) {
+            _serial.read();
+        }
     }
 
-    void printData() const {
-        Log.infoln("Camera command:");
-        Log.infoln("  start: (%d, %d)", _commandNow.start.x, _commandNow.start.y);
-        Log.infoln("  end:   (%d, %d)", _commandNow.end.x, _commandNow.end.y);
+    Command& getData() {
+        return _commandNow;
     }
 
 private:
@@ -57,10 +51,7 @@ private:
             return;
         }
 
-        _commandNow.start.x = doc["x1"];
-        _commandNow.start.y = doc["y1"];
-        _commandNow.end.x = doc["x2"];
-        _commandNow.end.y = doc["y2"];
+        _commandNow.data = doc["data"];
     }
 
     HardwareSerial& _serial;
@@ -78,6 +69,6 @@ inline CameraRepo* getImplementationOfCameraRepo() { return &instanceOfCameraRep
         repo->update();
         taskEXIT_CRITICAL();
 
-        delay(50);
+        delay(1);
     }
 }
