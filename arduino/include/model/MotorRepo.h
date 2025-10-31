@@ -95,6 +95,7 @@ public:
     {
         encReset();
         set(-Settings::SPEED_CALIBRATION);
+        const uint32_t startTime = millis();
 
         // Цикл работает, пока не будет нажата кнопка ИЛИ не наступит таймаут по току
         while (true)

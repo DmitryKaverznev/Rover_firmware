@@ -11,28 +11,30 @@
 #include "model/sonar/SonarRepo.h"
 #include "usecase/HoverGoSonarUseCase.h"
 #include "usecase/HoverSoftMoveUseCase.h"
-#include "usecase/HoverGoMPUUseCase.h"
+
 #include "usecase/RotateUseCase.h"
 #include "usecase/SonarWaitUseCase.h"
+
 #include "utilis/Result.h"
 #include "utilis/RepeatRun.h"
 
 class StageController {
 public:
-    void run() const {
+    void run() const
+  {
         Log.infoln("Starting main program...");
 
         sonarBackWaitUseCase->run();
         hoverSoftMoveUseCase->run(3000, {0, 50}); // ждём человека
 
-        const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(50); // едем до домика
+        const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(); // едем до домика
         if (status1 == HoverGoSonarUseCase::CAMERA) {
+            hoverRepo->set(50);
             hoverSoftMoveUseCase->run(1000, {50, 0});
             hoverRepo->set(0);
         }
-        /*
         hoverRepo->set(0);
-        delay(1500);
+        delay(1000);
 
         hoverSoftMoveUseCase->run(250, {0, -50});
         hoverSoftMoveUseCase->run(250, {-50, 0});
@@ -40,12 +42,12 @@ public:
         rotateUseCase->run(180, 20, {50, 7}); // разворачиваемся
         delay(500);
 
-        hoverSoftMoveUseCase->run(500, {0, 50});
+        hoverSoftMoveUseCase->run(3500, {0, 50});
 
-        const HoverGoSonarUseCase::StatusReturn status2 = hoverGoSonarUseCase->run(30); // едем до домика
+        const HoverGoSonarUseCase::StatusReturn status2 = hoverGoSonarUseCase->run(); // едем до домика
         if (status2 == HoverGoSonarUseCase::CAMERA) {
-            hoverRepo->set(30);
-            hoverSoftMoveUseCase->run(1400, {30, 0});
+            hoverRepo->set(50);
+            hoverSoftMoveUseCase->run(1000, {50, 0});
             hoverRepo->set(0);
         }
 
@@ -62,9 +64,7 @@ public:
         motorRepo->up();
 
         //*/
-
-
-  }
+    }
 
     Result init() const
     {
@@ -104,7 +104,6 @@ private:
     HoverGoSonarUseCase* hoverGoSonarUseCase = IO_INJECT(HoverGoSonarUseCase);
     SonarBackWaitUseCase* sonarBackWaitUseCase = IO_INJECT(SonarBackWaitUseCase);
     HoverSoftMoveUseCase* hoverSoftMoveUseCase = IO_INJECT(HoverSoftMoveUseCase);
-    HoverGoMPUUseCase* hoverGoMPUUseCase = IO_INJECT(HoverGoMPUUseCase);
 };
 
 StageController instanceOfStageController;

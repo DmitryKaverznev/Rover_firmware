@@ -48,22 +48,22 @@ private:
         const AngelCircle::AngelCircleStruct data = circle.getData();
 
         if (state == START) {
-            const ControlMathManager softMode = {
+            const SoftMode softMode = {
                 {data.start.get(), static_cast<double>(speed.min)},
                 {data.startStep.get(), static_cast<double>(speed.max)}
             };
-            hoverRepo->set(0, static_cast<int>(softMode.control_P(now.get())));
-            hoverRepo->set(0, static_cast<int>(softMode.control_P(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
         } else if (state == MAIN) {
             hoverRepo->set(0, static_cast<int>(speed.max));
             hoverRepo->set(0, static_cast<int>(speed.max));
         } else if (state == END) {
-            const ControlMathManager softMode = {
+            const SoftMode softMode = {
                 {data.end.get(), static_cast<double>(speed.min)},
                 {data.endStep.get(), static_cast<double>(speed.max)}
             };
-            hoverRepo->set(0, static_cast<int>(softMode.control_P(now.get())));
-            hoverRepo->set(0, static_cast<int>(softMode.control_P(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
+            hoverRepo->set(0, static_cast<int>(softMode.line(now.get())));
         } else {
             hoverRepo->set(0, static_cast<int>(speed.max / 10));
             hoverRepo->set(0, static_cast<int>(speed.max / 10));

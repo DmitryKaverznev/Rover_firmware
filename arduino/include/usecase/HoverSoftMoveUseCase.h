@@ -17,14 +17,14 @@ public:
     {
         const auto timeStart = millis();
 
-        const ControlMathManager softMode(
+        const SoftMode softMode(
             {0.0, static_cast<double>(speed.start)},
             {static_cast<double>(time), static_cast<double>(speed.end)}
         );
 
         while (millis() - timeStart < time) {
             const double elapsedMs = millis() - timeStart;
-            const double output = softMode.control_P(elapsedMs);
+            const double output = softMode.line(elapsedMs);
             _hoverRepo->set(static_cast<int>(output));
         }
     }
