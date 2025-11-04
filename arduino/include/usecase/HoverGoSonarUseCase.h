@@ -2,6 +2,7 @@
 #include "model/CameraRepo.h"
 #include "model/hover/HoverRepo.h"
 #include "model/sonar/SonarRepo.h"
+#include "utilis/MPULine.h"
 
 class HoverGoSonarUseCase
 {
@@ -19,15 +20,15 @@ public:
 
         while (true)
         {
+            Log.infoln("HoverGoSonarUseCase");
+
             _cameraRepo->update();
             command = _cameraRepo->getData();
             const uint16_t distForward = _sonarRepo->getMultyForward();
-            Log.infoln("HoverGoSonarUseCase -> distForward =: %d", distForward);
-
-            if (distForward < 30 && distForward != 0) {
+            if (distForward < 34 && distForward != 0) {
                 return SONAR;
             }
-            if (command.data == 1 || command.data == 2) {
+            if (command.data == 2) {
                 return CAMERA;
             }
         }

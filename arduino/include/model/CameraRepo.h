@@ -1,14 +1,12 @@
 #pragma once
 
 #include <Arduino.h>
-#include <ArduinoJson.h>
 #include <ArduinoLog.h>
 #include <Arduino_FreeRTOS.h>
 #include "Config.h"
-#include "utilis/Dot.h"
+
 #pragma once
 
-[[noreturn]] inline void vTaskCamera(void *pvParameters);
 class CameraRepo {
 public:
     explicit CameraRepo(HardwareSerial& serial)
@@ -42,16 +40,9 @@ private:
             return;
         }
 
-        JsonDocument doc;
-        String jsonStr = _serial.readStringUntil('\n');
-        const DeserializationError error = deserializeJson(doc, jsonStr);
-
-        if (error) {
-            Log.errorln("CameraRepo -> JSON deserialize error");
-            return;
+        if (_serial.read() == 0xC) {
+            _commandNow.data = 2;
         }
-
-        _commandNow.data = doc["data"];
     }
 
     HardwareSerial& _serial;
@@ -59,16 +50,3 @@ private:
 
 CameraRepo instanceOfCameraRepo(pins::uart::camera);
 inline CameraRepo* getImplementationOfCameraRepo() { return &instanceOfCameraRepo; }
-
-
-[[noreturn]] inline void vTaskCamera(void *pvParameters) {
-    auto* repo = static_cast<CameraRepo*>(pvParameters);
-
-    for (;;) {
-        taskENTER_CRITICAL();
-        repo->update();
-        taskEXIT_CRITICAL();
-
-        delay(1);
-    }
-}

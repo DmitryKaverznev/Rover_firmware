@@ -47,14 +47,6 @@ def getLineDots():
 
         return major_axis_line
 
-def toJson(data):
-    if data is None:
-        return -1
-    jsonData = {
-        "data": data
-    }
-    return json.dumps(jsonData)
-
 
 while(True):
     img = sensor.snapshot()
@@ -65,8 +57,9 @@ while(True):
     for tag in img.find_apriltags():
         img.draw_rectangle(tag.rect, color=(255, 0, 0))
         img.draw_cross(tag.cx, tag.cy, color=(0, 255, 0))
-        jsonData = toJson(tag.id)
-        uart.write(jsonData + '\n')
+
+        if (tag.id == 2 and tag.id == 1):
+            uart.write(0xC)
 
     if time.ticks_diff(time.ticks_ms(), last_blink_time) > 250:
         last_blink_time = time.ticks_ms()

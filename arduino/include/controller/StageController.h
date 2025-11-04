@@ -20,12 +20,12 @@
 
 class StageController {
 public:
-    void run() const
+    [[noreturn]] void run() const
   {
         Log.infoln("Starting main program...");
 
         sonarBackWaitUseCase->run();
-        hoverSoftMoveUseCase->run(3000, {0, 50}); // ждём человека
+        hoverSoftMoveUseCase->run(1000, {0, 50}); // ждём человека
 
         const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(); // едем до домика
         if (status1 == HoverGoSonarUseCase::CAMERA) {
@@ -55,13 +55,17 @@ public:
         delay(1500);
         hoverRepo->set(0);
 
-        delay(2500);
+        delay(500);
 
         servoRepo->init();
 
         servoRepo->move(ServoRepo::OPEN, 2000);
         delay(2500);
         motorRepo->up();
+
+        while (true) {
+            Log.infoln("> closed");
+        }
 
         //*/
     }
