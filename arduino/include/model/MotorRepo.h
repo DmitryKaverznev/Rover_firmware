@@ -41,11 +41,15 @@ public:
 
     void set(int speed) const
     {
+    #ifdef GLOBAL_CONFIG__ENABLE_LIFT
+
         speed = max(Settings::SPEED_MIN, min(Settings::SPEED_MAX, speed));
 
-        digitalWrite(_pinDir1, speed > 0);
-        digitalWrite(_pinDir2, speed < 0);
+        digitalWrite(_pinDir1, speed < 0);
+        digitalWrite(_pinDir2, speed > 0);
         analogWrite(_pinPwm, abs(speed));
+
+    #endif
     }
 
     void encoderInterrupt()

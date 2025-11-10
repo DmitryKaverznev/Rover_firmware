@@ -28,8 +28,8 @@ namespace pins {
         constexpr uint8_t echoF1 = 36;
         constexpr uint8_t trigF2 = 46;
         constexpr uint8_t echoF2 = 44;
-        constexpr uint8_t trigBack = 42;
-        constexpr uint8_t echoBack = 40;
+        constexpr uint8_t trigBack = 40;
+        constexpr uint8_t echoBack = 42;
     }
 
     constexpr uint8_t servoCap = 12;
