@@ -2,7 +2,7 @@
 
 #include <ArduinoLog.h>
 
-#include "utilis/Result.h"
+#include "util/Result.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "portmacro.h"

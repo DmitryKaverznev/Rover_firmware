@@ -56,7 +56,13 @@ private:
     HoverUnit hoverUp;
     HoverUnit hoverDown;
 
+#ifndef GLOBAL_CONFIG__ENABLE_MANUALLY
     const int maxSpeed = 60;
+#endif
+#ifdef GLOBAL_CONFIG__ENABLE_MANUALLY
+    const int maxSpeed = 45;
+#endif
+
 };
 
 HoverRepo instanceOfHoverRepo(pins::uart::hoverUp, pins::uart::hoverDown);

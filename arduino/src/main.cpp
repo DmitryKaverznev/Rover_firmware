@@ -3,7 +3,8 @@
 
 #include "ArduinoLog.h"
 #include "controller/StageController.h"
-#include "utilis/Result.h"
+#include "controller/ManuallyController.h"
+#include "util/Result.h"
 
 [[noreturn]] void vTaskMain(const void *pvParameters) {
     (void) pvParameters;
@@ -12,12 +13,23 @@
     Log.begin(LOG_LEVEL_TRACE, &Serial, true);
     Log.infoln("\n\n\n");
 
+#ifndef GLOBAL_CONFIG__ENABLE_MANUALLY
     const StageController* stageController = IO_INJECT(StageController);
 
     const Result isInit = stageController->init();
     if (isInit == Ok) {
         stageController->run();
     }
+
+
+#endif
+
+#ifdef GLOBAL_CONFIG__ENABLE_MANUALLY
+    ManuallyController* manuallyController = IO_INJECT(ManuallyController);
+
+    manuallyController->init();
+    manuallyController->run();
+#endif
 
     Log.infoln("Exit.");
     for(;;);

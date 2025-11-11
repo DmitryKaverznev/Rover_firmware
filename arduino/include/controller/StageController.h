@@ -3,7 +3,6 @@
 #include <ArduinoLog.h>
 #include <io_di.h>
 
-#include "Servo.h"
 #include "model/hover/HoverRepo.h"
 #include "model/CameraRepo.h"
 #include "model/MotorRepo.h"
@@ -15,8 +14,8 @@
 #include "usecase/RotateUseCase.h"
 #include "usecase/SonarWaitUseCase.h"
 
-#include "utilis/Result.h"
-#include "utilis/RepeatRun.h"
+#include "util/Result.h"
+#include "util/RepeatRun.h"
 
 class StageController {
 public:
@@ -32,7 +31,7 @@ public:
         const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(); // едем до домика
         if (status1 == HoverGoSonarUseCase::CAMERA) {
             hoverRepo->set(50);
-            hoverSoftMoveUseCase->run(1000, {50, 0});
+            hoverSoftMoveUseCase->run(900, {50, 0});
             hoverRepo->set(0);
         }
         hoverRepo->set(0);
@@ -45,7 +44,7 @@ public:
         rotateUseCase->run(180, 20, {50, 7}); // разворачиваемся
         delay(500);
 
-        hoverSoftMoveUseCase->run(3500, {0, 50});
+        hoverSoftMoveUseCase->run(5000, {0, 50});
 
         const HoverGoSonarUseCase::StatusReturn status2 = hoverGoSonarUseCase->run(); // едем до домика
         if (status2 == HoverGoSonarUseCase::CAMERA) {
@@ -66,10 +65,6 @@ public:
         delay(4500);
         motorRepo->up();
 
-        while (true) {
-            Log.infoln("> closed");
-        }
-
         //*/
     }
 
@@ -82,13 +77,12 @@ public:
         hoverRepo->set(0);
         delay(1000);
 
-        Result allInit = Ok;
-
-        allInit = resultAnd(allInit, repeatRun::initMPU(*mpuRepo));
-
 #ifdef GLOBAL_CONFIG__ENABLE_LIFT
         motorRepo->calibration();
 #endif
+
+        Result allInit = Ok;
+        allInit = resultAnd(allInit, repeatRun::initMPU(*mpuRepo));
 
         if (allInit == Error) {
             Log.fatalln("Mail init is fatal!");

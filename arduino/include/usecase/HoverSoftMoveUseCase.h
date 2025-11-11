@@ -3,7 +3,7 @@
 #include "io_di.h"
 #include "model/CameraRepo.h"
 #include "model/hover/HoverRepo.h"
-#include "utilis/SoftMode.h"
+#include "util/SoftMode.h"
 
 class HoverSoftMoveUseCase
 {

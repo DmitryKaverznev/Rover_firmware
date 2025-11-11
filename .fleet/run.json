@@ -1,9 +1,0 @@
-{
-  "configurations": [
-    {
-      "type": "command",
-      "name": "Run",
-      "program": "pio run --target upload"
-    }
-  ]
-}

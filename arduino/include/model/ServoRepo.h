@@ -6,7 +6,7 @@
 #include <Arduino_FreeRTOS.h>
 
 #include "Config.h"
-#include "utilis/SoftMode.h"
+#include "util/SoftMode.h"
 
 void vTaskServo(void *pvParameters);
 class ServoRepo

@@ -32,6 +32,11 @@ namespace pins {
         constexpr uint8_t echoBack = 42;
     }
 
+    namespace reciver {
+        constexpr uint8_t pinChannelSpeed = 30;
+        constexpr uint8_t pinChannelSteer = 31;
+    }
+
     constexpr uint8_t servoCap = 12;
 
 

@@ -3,9 +3,9 @@
 #include "io_di.h"
 #include "model/MPURepo.h"
 #include "model/hover/HoverRepo.h"
-#include "utilis/AngelUtility .h"
+#include "util/AngelUtility .h"
 
-#include "utilis/SoftMode.h"
+#include "util/SoftMode.h"
 
 class RotateUseCase {
 public:

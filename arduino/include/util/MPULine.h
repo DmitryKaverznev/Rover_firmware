@@ -2,7 +2,7 @@
 
 #include "io_di.h"
 #include "model/MPURepo.h"
-#include "utilis/AngelUtility .h"
+#include "util/AngelUtility .h"
 #include "SoftMode.h"
 
 class MPULine {

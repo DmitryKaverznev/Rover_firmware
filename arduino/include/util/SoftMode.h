@@ -1,6 +1,6 @@
 #pragma once
 
-#include <utilis/Dot.h>
+#include <util/Dot.h>
 #include <ArduinoLog.h>
 #include <Arduino.h>
 
