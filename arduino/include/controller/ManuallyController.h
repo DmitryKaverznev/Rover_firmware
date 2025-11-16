@@ -9,26 +9,14 @@ class ManuallyController
 {
 public:
     [[noreturn]] void run() const {
+
+        // _arming();
+
         while (true) {
-            constexpr short SIZE_ARRAY = 3;
+            const ReceiverData data = receiverRepo->getMedian();
 
-            long arrayDataSpeed[SIZE_ARRAY] = {};
-            long arrayDataSteer[SIZE_ARRAY] = {};
-
-            for (short i = 0; i < SIZE_ARRAY; i++) {
-                const ReceiverData data = receiverRepo->get();
-                arrayDataSpeed[i] = data.speed;
-                arrayDataSteer[i] = data.steer;
-            }
-
-            ace_sorting::shellSortKnuth(arrayDataSpeed, SIZE_ARRAY);
-            ace_sorting::shellSortKnuth(arrayDataSteer, SIZE_ARRAY);
-
-            const long medianSpeed = arrayDataSpeed[SIZE_ARRAY / 2 + 1];
-            const long medianSteer = arrayDataSteer[SIZE_ARRAY / 2 + 1];
-
-            Log.infoln("ManuallyController -> %l %l", medianSpeed, medianSteer);
-            hoverRepo->set(static_cast<int>(medianSpeed), static_cast<int>(medianSteer));
+            Log.infoln("ManuallyController -> %l %l", data.speed, data.steer);
+            hoverRepo->set(static_cast<int>(data.speed), static_cast<int>(data.steer));
         }
     }
 
@@ -42,7 +30,7 @@ public:
 
         receiverRepo->init();
 
-        Log.infoln("Main init is success");  
+        Log.infoln("Main init is success");
     }
 
 

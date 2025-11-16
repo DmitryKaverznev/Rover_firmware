@@ -4,6 +4,7 @@
 
 #include "ArduinoLog.h"
 #include "Config.h"
+#include "ace_sorting/shellSort.h"
 
 struct ReceiverData {
     long speed;
@@ -44,16 +45,41 @@ public:
         return {speed, steer};
     }
 
+    ReceiverData getMedian() const {
+        constexpr short SIZE_ARRAY = 3;
+
+        long arrayDataSpeed[SIZE_ARRAY] = {};
+        long arrayDataSteer[SIZE_ARRAY] = {};
+
+        for (short i = 0; i < SIZE_ARRAY; i++) {
+            ReceiverData data = get();
+            while (data.speed == Settings::OUTPUT_MIN && data.steer == Settings::OUTPUT_MIN) {
+                data = get();
+            }
+
+            arrayDataSpeed[i] = data.speed;
+            arrayDataSteer[i] = data.steer;
+        }
+
+        ace_sorting::shellSortKnuth(arrayDataSpeed, SIZE_ARRAY);
+        ace_sorting::shellSortKnuth(arrayDataSteer, SIZE_ARRAY);
+
+        const long medianSpeed = arrayDataSpeed[SIZE_ARRAY / 2 + 1];
+        const long medianSteer = arrayDataSteer[SIZE_ARRAY / 2 + 1];
+
+        return {medianSpeed, medianSteer};
+    }
     struct Settings {
         static constexpr uint16_t SPEED_MAX = 2100;
         static constexpr uint16_t SPEED_MIN = 900;
         static constexpr uint16_t STEER_MAX = 1870;
         static constexpr uint16_t STEER_MIN = 1170;
-        static constexpr int16_t SPEED_CENTER = (SPEED_MAX + SPEED_MIN) / 2;
-        static constexpr int16_t STEER_CENTER = (STEER_MAX + STEER_MIN) / 2;
-        static constexpr uint16_t DEAD_ZONE = 10;
-        static constexpr int16_t OUTPUT_MAX = 45;
-        static constexpr int16_t OUTPUT_MIN = -45;
+        static constexpr int16_t  SPEED_CENTER = (SPEED_MAX + SPEED_MIN) / 2;
+        static constexpr int16_t  STEER_CENTER = (STEER_MAX + STEER_MIN) / 2;
+        static constexpr uint16_t DEAD_ZONE = 15;
+        static constexpr uint16_t DEAD_ZONE_DIV2 = DEAD_ZONE / 2;
+        static constexpr int16_t  OUTPUT_MAX = 100;
+        static constexpr int16_t  OUTPUT_MIN = -100;
     };
 
 private:
@@ -61,5 +87,5 @@ private:
     uint16_t _pinChannelSteer;
 };
 
-ReceiverRepo instanceOfReceiverRepo(pins::reciver::pinChannelSpeed, pins::reciver::pinChannelSteer);
+ReceiverRepo instanceOfReceiverRepo(pins::receiver::pinChannelSpeed, pins::receiver::pinChannelSteer);
 inline ReceiverRepo* getImplementationOfReceiverRepo() { return &instanceOfReceiverRepo; }

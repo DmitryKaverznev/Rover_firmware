@@ -20,14 +20,13 @@
 class StageController {
 public:
     void run() const
-  {
+    {
         Log.infoln("Starting main program...");
 
 
         sonarBackWaitUseCase->run();
         hoverSoftMoveUseCase->run(1000, {0, 50}); // ждём человека
 
-        
         const HoverGoSonarUseCase::StatusReturn status1 = hoverGoSonarUseCase->run(); // едем до домика
         if (status1 == HoverGoSonarUseCase::CAMERA) {
             hoverRepo->set(50);
@@ -58,7 +57,6 @@ public:
         hoverRepo->set(0);
 
         delay(500);
-
         servoRepo->init();
 
         servoRepo->move(ServoRepo::OPEN, 4000);
@@ -77,9 +75,7 @@ public:
         hoverRepo->set(0);
         delay(1000);
 
-#ifdef GLOBAL_CONFIG__ENABLE_LIFT
         motorRepo->calibration();
-#endif
 
         Result allInit = Ok;
         allInit = resultAnd(allInit, repeatRun::initMPU(*mpuRepo));

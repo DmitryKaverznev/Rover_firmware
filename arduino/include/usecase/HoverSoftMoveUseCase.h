@@ -22,8 +22,8 @@ public:
             {static_cast<double>(time), static_cast<double>(speed.end)}
         );
 
-        while (millis() - timeStart < time) {
-            const double elapsedMs = millis() - timeStart;
+        while (static_cast<double>(millis()) - static_cast<double>(timeStart) < time) {
+            const double elapsedMs = static_cast<double>(millis()) - static_cast<double>(timeStart);
             const double output = softMode.line(elapsedMs);
             _hoverRepo->set(static_cast<int>(output));
         }

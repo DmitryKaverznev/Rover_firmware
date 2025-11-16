@@ -20,7 +20,7 @@ public:
         const AngelCircle circle(Angel(0.0f), Angel(angle), diff);
 
         while (true) {
-            const float currentAngle = getYaw() - baseAngle;
+            const double currentAngle = getYaw() - baseAngle;
             const Angel now(currentAngle);
 
             rotate(now, circle, speed);

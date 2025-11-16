@@ -14,7 +14,7 @@ public:
 
     StatusReturn run() const
     {
-        CameraRepo::Command command;
+        CameraRepo::Command command{};
         command.data = 0;
         _cameraRepo->clear();
 

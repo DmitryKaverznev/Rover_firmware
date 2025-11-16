@@ -8,8 +8,6 @@ namespace settings {
     }
 
     constexpr uint16_t sonarDist = 30;
-
-
 }
 
 namespace pins {
@@ -32,7 +30,7 @@ namespace pins {
         constexpr uint8_t echoBack = 42;
     }
 
-    namespace reciver {
+    namespace receiver {
         constexpr uint8_t pinChannelSpeed = 30;
         constexpr uint8_t pinChannelSteer = 31;
     }

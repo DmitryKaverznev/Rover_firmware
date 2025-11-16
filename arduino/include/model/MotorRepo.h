@@ -4,6 +4,7 @@
 
 #include "ArduinoLog.h"
 #include "Config.h"
+#include "GlobalConfig.h"
 #include "io_di.h"
 
 class MotorRepo;
@@ -41,7 +42,7 @@ public:
 
     void set(int speed) const
     {
-    #ifdef GLOBAL_CONFIG__ENABLE_LIFT
+    #ifdef GLOBAL_CONFIG_ENABLE_LIFT
 
         speed = max(Settings::SPEED_MIN, min(Settings::SPEED_MAX, speed));
 
@@ -97,6 +98,7 @@ public:
 
     void calibration()
     {
+#ifdef GLOBAL_CONFIG_ENABLE_LIFT
         encReset();
         set(-Settings::SPEED_CALIBRATION);
 
@@ -106,18 +108,11 @@ public:
             {
                 break;
             }
-/*
-            if (getCurr() > Settings::CURR_MAX)
-            {
-                if ((millis() - startTime) >= 2000)
-                {
-                    break;
-                }
-            }*/
         }
 
         set(0);
         encReset();
+#endif
     }
 
 

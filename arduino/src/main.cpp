@@ -4,6 +4,8 @@
 #include "ArduinoLog.h"
 #include "controller/StageController.h"
 #include "controller/ManuallyController.h"
+#include "controller/SuperTeamController.h"
+#include "GlobalConfig.h"
 #include "util/Result.h"
 
 [[noreturn]] void vTaskMain(const void *pvParameters) {
@@ -13,22 +15,35 @@
     Log.begin(LOG_LEVEL_TRACE, &Serial, true);
     Log.infoln("\n\n\n");
 
-#ifndef GLOBAL_CONFIG__ENABLE_MANUALLY
+#ifdef GLOBAL_CONFIG_MODE_AUTO      // режим управления на сцене
+    Log.infoln("Main: use STATE mode");
     const StageController* stageController = IO_INJECT(StageController);
 
-    const Result isInit = stageController->init();
-    if (isInit == Ok) {
+    const Result isInitManually = stageController->init();
+    if (isInitManually == Ok) {
         stageController->run();
     }
-
-
 #endif
 
-#ifdef GLOBAL_CONFIG__ENABLE_MANUALLY
+#ifdef GLOBAL_CONFIG_MODE_MANUALLY       // режим управления через пульт
+    Log.infoln("Main: use MANUALLY mode");
     ManuallyController* manuallyController = IO_INJECT(ManuallyController);
 
     manuallyController->init();
     manuallyController->run();
+#endif
+
+
+#ifdef GLOBAL_CONFIG_MODE_SUPERTEAM
+    Log.infoln("Main: use SUPERTEAM mode");
+
+    SuperTeamController* superTeamController = IO_INJECT(SuperTeamController);
+
+
+    const Result isInitSuperTeam = superTeamController->init();
+    if (isInitSuperTeam == Ok) {
+        superTeamController->run();
+    }
 #endif
 
     Log.infoln("Exit.");

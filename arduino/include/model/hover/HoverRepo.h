@@ -3,6 +3,7 @@
 #include <ArduinoLog.h>
 #include <Arduino_FreeRTOS.h>
 
+#include "GlobalConfig.h"
 #include "Config.h"
 #include "HoverUnit.h"
 
@@ -56,13 +57,7 @@ private:
     HoverUnit hoverUp;
     HoverUnit hoverDown;
 
-#ifndef GLOBAL_CONFIG__ENABLE_MANUALLY
-    const int maxSpeed = 60;
-#endif
-#ifdef GLOBAL_CONFIG__ENABLE_MANUALLY
-    const int maxSpeed = 45;
-#endif
-
+    const int maxSpeed = MAX_SPEED;
 };
 
 HoverRepo instanceOfHoverRepo(pins::uart::hoverUp, pins::uart::hoverDown);
